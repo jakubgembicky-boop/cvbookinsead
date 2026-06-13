@@ -1,0 +1,1370 @@
+{
+ "nationalities": {
+  "British / United Kingdom, France, Singapore Student Pass": [
+   "United Kingdom"
+  ],
+  "Austria (EU), Indonesia": [
+   "Austria",
+   "Indonesia"
+  ],
+  "Lebanese, UAE golden visa holder": [
+   "Lebanon"
+  ],
+  "Pakistani, Bahrain (Residence Permit), France (Student Visa)": [
+   "Pakistan"
+  ],
+  "Brazilian and Portuguese. Authorized to work in Brazil and the European Union": [
+   "Brazil",
+   "Portugal"
+  ],
+  "American / USA (permanent) and France (2026)": [
+   "United States"
+  ],
+  "Spanish; Other Languages: fluent English (C1 Advanced), intermediate-basic French (DELF B1)": [
+   "Spain"
+  ],
+  "Spanish national, with pre-settled status to work in UK": [
+   "Spain"
+  ],
+  "Italian / EU work authorization": [
+   "Italy"
+  ],
+  "French - EU area": [
+   "France"
+  ],
+  "Belgian Citizen": [
+   "Belgium"
+  ],
+  "Canadian Citizen; UAE Golden Visa Holder": [
+   "Canada"
+  ],
+  "Lebanese National | UAE Golden Residence Visa": [
+   "Lebanon"
+  ],
+  "Canada and Taiwan": [
+   "Canada",
+   "Taiwan"
+  ],
+  "Singaporean Citizen": [
+   "Singapore"
+  ],
+  "Brazil, United States, Italy (European Union)": [
+   "Brazil",
+   "United States",
+   "Italy"
+  ],
+  "Egyptian": [
+   "Egypt"
+  ],
+  "Brazilian, Portuguese": [
+   "Brazil",
+   "Portugal"
+  ],
+  "Greek / European Union (work authorisation)": [
+   "Greece"
+  ],
+  "USA": [
+   "United States"
+  ],
+  "Indian, Canadian Open Work Permit": [
+   "India",
+   "Canada"
+  ],
+  "UK indefinite leave to remain (work authorization); U.S./French citizenship": [],
+  "Cameroonian": [
+   "Cameroon"
+  ],
+  "Lebanese / United Arab Emirates": [
+   "Lebanon",
+   "UAE"
+  ],
+  "Estonian / EU and UK": [
+   "Estonia",
+   "United Kingdom"
+  ],
+  "German": [
+   "Germany"
+  ],
+  "India (Nationality), France (Student Visa)": [
+   "India"
+  ],
+  "Myanmar": [
+   "Myanmar"
+  ],
+  "Israeli, Portuguese (EU)": [
+   "Israel",
+   "Portugal"
+  ],
+  "Dutch, the Netherlands (EU-citizen)": [
+   "Netherlands"
+  ],
+  "Indonesian (Nationality), French (Student Visa), Singapore (Student Visa)": [
+   "Indonesia"
+  ],
+  "Indian": [
+   "India"
+  ],
+  "Indian Passport Holder / UAE Golden Visa Holder": [
+   "India"
+  ],
+  "Singapore Citizen": [
+   "Singapore"
+  ],
+  "Greek (EU work authorization), United Arab Emirates": [
+   "Greece"
+  ],
+  "United Kingdom (Indefinite Leave to Remain), US (H1-B Dependent), India (Citizen)": [
+   "India"
+  ],
+  "Indonesian": [
+   "Indonesia"
+  ],
+  "Portuguese and German, Singapore Student Pass": [
+   "Portugal",
+   "Germany"
+  ],
+  "German Passport holder, EU work authorisation": [
+   "Germany"
+  ],
+  "India (Citizen), United Arab Emirates (Resident), France (Student)": [
+   "India"
+  ],
+  "Hungarian, EU work authorization": [
+   "Hungary"
+  ],
+  "Dual citizenship: Brazilian and Italian": [
+   "Brazil",
+   "Italy"
+  ],
+  "French, Italian, Lebanese": [
+   "France",
+   "Italy",
+   "Lebanon"
+  ],
+  "Portuguese / European Union": [
+   "Portugal"
+  ],
+  "United Arab Emirates (Golden Visa), France (Student Visa), India (Citizen)": [
+   "India"
+  ],
+  "Singapore (Student Pass); India (Citizen)": [
+   "India"
+  ],
+  "British / UK": [
+   "United Kingdom"
+  ],
+  "Lebanese, with a French Student Visa (VLS-TS)": [
+   "Lebanon"
+  ],
+  "US Passport, Singapore Student Pass Work Authorization": [
+   "United States"
+  ],
+  "Greece, UK, Cyprus / Authorized to work in the EU & UK": [
+   "Greece",
+   "United Kingdom",
+   "Cyprus"
+  ],
+  "Swiss C Residence Permit; EU passport (Spanish)": [],
+  "Singaporean, France (Student Visa)": [
+   "Singapore"
+  ],
+  "Canadian": [
+   "Canada"
+  ],
+  "Indian Passport Holder/UAE Golden Visa Holder": [
+   "India"
+  ],
+  "India (passport holder), Singapore (student pass), France (student visa)": [
+   "India"
+  ],
+  "Israeli": [
+   "Israel"
+  ],
+  "Italian, Work authorisation for EU": [
+   "Italy"
+  ],
+  "Dutch (The Netherlands)": [
+   "Netherlands"
+  ],
+  "Lebanese": [
+   "Lebanon"
+  ],
+  "India (Nationality), France (Study Visa)": [
+   "India"
+  ],
+  "Indian, Singapore (Student Pass)": [
+   "India"
+  ],
+  "German Citizenship; Singapore (Student Pass)": [
+   "Germany"
+  ],
+  "Vietnamese/ Vietnam, Singapore (Student Pass)": [
+   "Vietnam"
+  ],
+  "Chilean and German / Chile and European Union": [
+   "Chile",
+   "Germany"
+  ],
+  "Chile": [
+   "Chile"
+  ],
+  "British": [
+   "United Kingdom"
+  ],
+  "United Kingdom": [
+   "United Kingdom"
+  ],
+  "Norwegian": [
+   "Norway"
+  ],
+  "Taiwan, Hong Kong, China": [
+   "Taiwan",
+   "Hong Kong",
+   "China"
+  ],
+  "Danish (citizen)": [
+   "Denmark"
+  ],
+  "Cameroon (citizen)": [
+   "Cameroon"
+  ],
+  "French | Work Authorization: Eligible to work in Hong Kong (spousal visa)": [
+   "France"
+  ],
+  "Mongolian and Singapore PR": [
+   "Mongolia"
+  ],
+  "Brazilian and Italian": [
+   "Brazil",
+   "Italy"
+  ],
+  "Korean": [
+   "South Korea"
+  ],
+  "United States Permanent Residency, Indian Citizen": [
+   "India"
+  ],
+  "Colombia": [
+   "Colombia"
+  ],
+  "India, France (Student visa), Singapore (Student pass)": [
+   "India"
+  ],
+  "Austrian/ European Union": [
+   "Austria"
+  ],
+  "Peruvian, with permit to work in Chile": [
+   "Peru"
+  ],
+  "Brazilian": [
+   "Brazil"
+  ],
+  "Spanish, Venezuelan, Mexican": [
+   "Spain",
+   "Venezuela",
+   "Mexico"
+  ],
+  "E.U. (Spanish, Austrian citizen), U.K. (settled status)": [
+   "Spain",
+   "Austria",
+   "United Kingdom"
+  ],
+  "Italian": [
+   "Italy"
+  ],
+  "German/Portuguese": [
+   "Germany",
+   "Portugal"
+  ],
+  "British & Barbadian": [
+   "United Kingdom",
+   "Barbados"
+  ],
+  "Japanese / Japan, Singapore Student Pass": [
+   "Japan"
+  ],
+  "Belgian/ EU Citizen": [
+   "Belgium"
+  ],
+  "USA, France, Singapore": [
+   "United States"
+  ],
+  "British, French (EU) & Lebanese | Singapore Student Pass": [
+   "United Kingdom",
+   "France",
+   "Lebanon"
+  ],
+  "Georgian": [
+   "Georgia"
+  ],
+  "Spanish | European Union": [
+   "Spain"
+  ],
+  "Spanish, Swiss; EU work permit and eligible to work in Singapore during summer internship": [
+   "Spain",
+   "Switzerland"
+  ],
+  "Italian, EU/EEA (no visa required), Singapore (Student Visa)": [
+   "Italy"
+  ],
+  "French (EU citizens)": [
+   "France"
+  ],
+  "Portuguese": [
+   "Portugal"
+  ],
+  "Paraguay and German (EU citizen) national, with further authorisation for work in Brazil": [
+   "Paraguay",
+   "Germany",
+   "Brazil"
+  ],
+  "Spain, British Settled Status (EUSS)": [
+   "Spain"
+  ],
+  "Canadian / Lebanese / Colombian": [
+   "Canada",
+   "Lebanon",
+   "Colombia"
+  ],
+  "Lebanese / United Arab Emirates, European Union, Singapore, Lebanon": [
+   "Lebanon",
+   "UAE"
+  ],
+  "Moroccan/Subject to visa requirements": [
+   "Morocco"
+  ],
+  "Turkish": [
+   "Turkey"
+  ],
+  "Singaporean": [
+   "Singapore"
+  ],
+  "Lebanese (Work Authorisation: UAE & Lebanon)": [
+   "Lebanon"
+  ],
+  "Korean / Korea, France": [
+   "South Korea"
+  ],
+  "Spanish": [
+   "Spain"
+  ],
+  "Swiss & German": [
+   "Switzerland",
+   "Germany"
+  ],
+  "Japanese": [
+   "Japan"
+  ],
+  "Indonesian/Indonesia": [
+   "Indonesia"
+  ],
+  "South Korean, Singapore(Student Pass)": [
+   "South Korea"
+  ],
+  "Brazilian and European Union (Spanish citizenship)": [
+   "Brazil"
+  ],
+  "UK": [
+   "United Kingdom"
+  ],
+  "French and Morocco national, UK Pre-settled Status": [
+   "France",
+   "Morocco"
+  ],
+  "UK and EU passport holder": [
+   "United Kingdom"
+  ],
+  "EU, United States of America": [
+   "United States"
+  ],
+  "British and Italian citizenship; authorised to work in UK and EU": [
+   "United Kingdom",
+   "Italy"
+  ],
+  "Peruvian": [
+   "Peru"
+  ],
+  "French citizenship, Singa pore Student Pass (ICA) holder": [
+   "France"
+  ],
+  "Lebanon | United Arab Emirates | Saudi Arabia": [
+   "Lebanon",
+   "UAE",
+   "Saudi Arabia"
+  ],
+  "Slovak (EU Citizen), UK Pre-settled status (until 2029)": [
+   "Slovakia"
+  ],
+  "Dutch/ EU": [
+   "Netherlands"
+  ],
+  "US citizen; holder of F4 VISA for South Korea": [
+   "United States"
+  ],
+  "Indonesian / Work Authorization: Singapore (SP)": [
+   "Indonesia"
+  ],
+  "Uzbekistan / Singapore (Student Pass)": [
+   "Uzbekistan"
+  ],
+  "USA, Canada, France (Student Visa)": [
+   "United States",
+   "Canada"
+  ],
+  "Canada, Japan, Switzerland": [
+   "Canada",
+   "Japan",
+   "Switzerland"
+  ],
+  "Republic of Korea, Singapore (Student Visa)": [
+   "South Korea"
+  ],
+  "China / U.S., Brazil": [
+   "China",
+   "United States",
+   "Brazil"
+  ],
+  "German/Finnish, UK Settled Status (Life-long Work Visa), Singapore Student Pass": [
+   "Germany",
+   "Finland"
+  ],
+  "British, French, Brazilian / work authorizations in the United Kingdom, European Union, Brazil and Hong Kong": [
+   "United Kingdom",
+   "France",
+   "Brazil",
+   "Hong Kong"
+  ],
+  "Spain, United States of America, Singapore (Student Pass)": [
+   "Spain",
+   "United States"
+  ],
+  "German citizen": [
+   "Germany"
+  ],
+  "South Korean / Work Authorization: Korea": [
+   "South Korea"
+  ],
+  "South African, Lithuanian (EU) | Work Authorisation: European Union, South Africa": [
+   "South Africa",
+   "Lithuania"
+  ],
+  "Spanish/European Union and United Kingdom": [
+   "Spain",
+   "United Kingdom"
+  ],
+  "Dutch nationality, authorised to work anywhere in the EU": [
+   "Netherlands"
+  ],
+  "Peruvian, student Visa for France": [
+   "Peru"
+  ],
+  "Mexican; Spanish citizenship expected Summer 2026 (EU work authorization)": [
+   "Mexico",
+   "Spain"
+  ],
+  "French, United Kingdom (Indefinite Leave to Remain)": [
+   "France"
+  ],
+  "Korean / Singapore Student Pass (~Jan. 2027)": [
+   "South Korea"
+  ],
+  "American, USA": [
+   "United States"
+  ],
+  "Canadian Citizen": [
+   "Canada"
+  ],
+  "Indian / India and France (Talent Visa)": [
+   "India"
+  ],
+  "French, Lebanese": [
+   "France",
+   "Lebanon"
+  ],
+  "Indonesia": [
+   "Indonesia"
+  ],
+  "Brazil": [
+   "Brazil"
+  ],
+  "United Kingdom, Ireland, Lebanon": [
+   "United Kingdom",
+   "Ireland",
+   "Lebanon"
+  ],
+  "German (EU)": [
+   "Germany"
+  ],
+  "American and French": [
+   "United States",
+   "France"
+  ],
+  "Azerbaijani": [
+   "Azerbaijan"
+  ],
+  "Chinese, Singapore (Student Pass), France (Student Visa)": [
+   "China"
+  ],
+  "German (EU work authorization)": [
+   "Germany"
+  ],
+  "Italian / EU": [
+   "Italy"
+  ],
+  "Brazilian/French student visa until Dec 26": [
+   "Brazil"
+  ],
+  "Brazilian; Unrestricted EU/EEA work authorisation (EU Spouse/Directive 2004/38/EC)": [
+   "Brazil"
+  ],
+  "China": [
+   "China"
+  ],
+  "Israel": [
+   "Israel"
+  ],
+  "Chinese / Working permit in France": [
+   "China"
+  ],
+  "Netherlands/UAE Golden Visa": [
+   "Netherlands"
+  ],
+  "French citizenship and British Permanent Residence": [
+   "France"
+  ],
+  "French / UE": [
+   "France"
+  ],
+  "Spanish, available to work in Europe": [
+   "Spain"
+  ],
+  "Spanish, European Union": [
+   "Spain"
+  ],
+  "EU (French), UK work permit": [
+   "United Kingdom"
+  ],
+  "Spanish / EU": [
+   "Spain"
+  ],
+  "Spanish/ EU": [
+   "Spain"
+  ],
+  "Brazilian, German": [
+   "Brazil",
+   "Germany"
+  ],
+  "American": [
+   "United States"
+  ],
+  "Indian citizen, Canadian work permit, H-1B visa holder": [
+   "India",
+   "Canada"
+  ],
+  "Qatari / American": [
+   "Qatar",
+   "United States"
+  ],
+  "United States, European Union (European Blue Card until Dec 2026, Student Visa in progress)": [
+   "United States"
+  ],
+  "Spanish / European Union": [
+   "Spain"
+  ],
+  "Lebanese, Kittian and Nevisian": [
+   "Lebanon",
+   "St Kitts and Nevis"
+  ],
+  "Germany / EU, Singapore": [
+   "Germany"
+  ],
+  "Chilean": [
+   "Chile"
+  ],
+  "Spain (EU citizen), United Kingdom High Potential Individual visa eligible, Venezuela": [
+   "Spain",
+   "Venezuela"
+  ],
+  "Colombia, Spain, Singapore (Student Pass)": [
+   "Colombia",
+   "Spain"
+  ],
+  "European Union, UK": [
+   "United Kingdom"
+  ],
+  "Italy; European Union": [
+   "Italy"
+  ],
+  "U.S.A and France": [
+   "United States"
+  ],
+  "Canadian and Burkina Faso citizenships. Work authorization in Canada, USA, UK, France, and West Africa": [
+   "Canada",
+   "Burkina Faso"
+  ],
+  "EU citizenship, Italian and Brazilian nationality": [
+   "Italy",
+   "Brazil"
+  ],
+  "Canadian; Canada, Singapore (student visa)": [
+   "Canada"
+  ],
+  "Chilean, French Student Visa (able to work in European Union), also able to request german residency through spouse": [
+   "Chile"
+  ],
+  "Swedish (EU work authorization) and Lebanese": [
+   "Sweden"
+  ],
+  "British Citizen": [
+   "United Kingdom"
+  ],
+  "Germany / EU / Singapore": [
+   "Germany"
+  ],
+  "German / EU": [
+   "Germany"
+  ],
+  "Morocco, France and European Union": [
+   "Morocco"
+  ],
+  "Lebanese, United Arab Emirates": [
+   "Lebanon",
+   "UAE"
+  ],
+  "French / Filipino / European Union": [
+   "France",
+   "Philippines"
+  ],
+  "Chinese Citizen; Singapore (Student Pass)": [
+   "China"
+  ],
+  "Mexican. Authorized to work in Mexico without visa sponsorship.": [
+   "Mexico"
+  ],
+  "EU and Chile": [
+   "Chile"
+  ],
+  "Canadian with UK work authorization": [
+   "Canada",
+   "United Kingdom"
+  ],
+  "Vietnamese / Vietnam, Singapore (Student Pass Holder)": [
+   "Vietnam"
+  ],
+  "Dual Moroccan / French (EU) Citizen": [
+   "Morocco",
+   "France"
+  ],
+  "Ukrainian": [
+   "Ukraine"
+  ],
+  "Indonesian (Malaysian PR, France and Singapore Student Pass holder)": [],
+  "Pakistan": [
+   "Pakistan"
+  ],
+  "Venezuelan, Spanish, American": [
+   "Venezuela",
+   "Spain",
+   "United States"
+  ],
+  "Swiss": [
+   "Switzerland"
+  ],
+  "Thailand": [
+   "Thailand"
+  ],
+  "United States of America and France; work authorization for all EU": [
+   "United States"
+  ],
+  "EU/EAA countries, Switzerland": [
+   "Switzerland"
+  ],
+  "Singapore, United Arab Emirates, European Union, Lebanon": [
+   "UAE",
+   "Lebanon"
+  ],
+  "French citizen, with a settled status in the United Kingdom": [
+   "France"
+  ],
+  "Singaporean / Singapore, Hong Kong (TTPS and QMAS)": [
+   "Singapore"
+  ],
+  "Greek/European Union": [
+   "Greece"
+  ],
+  "United States of America, Israel": [
+   "United States",
+   "Israel"
+  ],
+  "United States of America": [
+   "United States"
+  ],
+  "United States of America, Portugal, Lebanon": [
+   "United States",
+   "Portugal",
+   "Lebanon"
+  ],
+  "British and Nigerian citizenship": [
+   "United Kingdom",
+   "Nigeria"
+  ],
+  "Nigerian / Nigeria": [
+   "Nigeria"
+  ],
+  "Russian; holder of a French residence permit (Passport Talent)": [
+   "Russia"
+  ],
+  "Indian; Currently holding Singapore Student Visas (valid until Jan 2027)": [
+   "India"
+  ],
+  "Thai citizen; Singapore student pass": [
+   "Thailand"
+  ],
+  "Italian; United Arab Emirates, Singapore, European Union": [
+   "Italy",
+   "UAE"
+  ],
+  "American with French/EU work visa": [
+   "United States"
+  ],
+  "India, France (Student visa) and Singapore (Student visa)": [
+   "India"
+  ],
+  "Vietnamese": [
+   "Vietnam"
+  ],
+  "Lebanese, Canadian, UAE (Golden Visa)": [
+   "Lebanon",
+   "Canada"
+  ],
+  "Lebanese. UAE and EU Work Authorizations": [
+   "Lebanon",
+   "UAE"
+  ],
+  "French / EU, EEA": [
+   "France"
+  ],
+  "French – Lebanese, EU, extensive GCC/MENA stakeholder experience": [
+   "Lebanon"
+  ],
+  "Indian/ India, Singapore Student Pass": [
+   "India"
+  ],
+  "United Kingdom, India": [
+   "United Kingdom",
+   "India"
+  ],
+  "United Kingdom, United Arab Emirates, India": [
+   "United Kingdom",
+   "UAE",
+   "India"
+  ],
+  "British, Irish (EU), Ghanaian": [
+   "United Kingdom",
+   "Ireland",
+   "Ghana"
+  ],
+  "Brazilian - South Korean": [
+   "South Korea"
+  ],
+  "Lebanese | Work Authorization: Valid French Residence Permit": [
+   "Lebanon"
+  ],
+  "French": [
+   "France"
+  ],
+  "Singapore (Citizen), France (Student Visa)": [
+   "Singapore"
+  ],
+  "India": [
+   "India"
+  ],
+  "Indian/India, Australia (in-process and expected by May/June, 2026)": [
+   "India",
+   "Australia"
+  ],
+  "US Citizen, Dubai Residency, UK HPI Visa Eligibility": [
+   "United States"
+  ],
+  "Vietnamese/ Vietnam, Singapore – France (Student pass)": [
+   "Vietnam"
+  ],
+  "Malaysian with Singaporean PR": [
+   "Malaysia"
+  ],
+  "Singapore (Citizenship)": [
+   "Singapore"
+  ],
+  "French, Malagasy": [
+   "France",
+   "Madagascar"
+  ],
+  "Indian | Work Authorization: Singapore (Student Pass); France (VLS-TS long-stay visa); U.S. (C1/D visa)": [
+   "India"
+  ],
+  "India (citizen), France (student visa)": [
+   "India"
+  ],
+  "China (citizen), USA (H4 EAD, priority date Aug 2023, PR expected in 2027-2028).": [
+   "China"
+  ],
+  "Japan": [
+   "Japan"
+  ],
+  "American / United States of America": [
+   "United States"
+  ],
+  "South African, Singapore (Student Pass)": [
+   "South Africa"
+  ],
+  "Austria, EU work authorization": [
+   "Austria"
+  ],
+  "South Korean/South Korea, Singapore (Student pass)": [
+   "South Korea"
+  ],
+  "Belgian / European Union, Singapore (Student-Pass)": [
+   "Belgium"
+  ],
+  "Malaysia (Citizen), Australia (Permanent Resident), Singapore (Student Pass)": [
+   "Malaysia"
+  ],
+  "South Korean, Singapore (Student Pass, ~Jan. 2027)": [
+   "South Korea"
+  ],
+  ": Singapore, Pakistan": [
+   "Pakistan"
+  ],
+  "Japanese(citizenship)": [
+   "Japan"
+  ],
+  "Brazilian and Italian (Brazil and EU passports)": [
+   "Brazil",
+   "Italy"
+  ],
+  "Swiss (EU work authorisation)": [
+   "Switzerland"
+  ],
+  "French citizenship / Work authorization across all European Union & Singapore (Student Pass)": [
+   "France"
+  ],
+  "Switzerland, United Kingdom, Hong Kong": [
+   "Switzerland",
+   "United Kingdom",
+   "Hong Kong"
+  ],
+  "Kenya": [
+   "Kenya"
+  ],
+  "Dual Citizenship (UK/Austria)": [
+   "United Kingdom",
+   "Austria"
+  ],
+  "Italian/EU/Singapore student pass": [
+   "Italy"
+  ],
+  "South Korean": [
+   "South Korea"
+  ],
+  "Indonesian, Canada (Employer-specific), Singapore STP holder": [
+   "Indonesia"
+  ],
+  "Croatian / European Union": [
+   "Croatia"
+  ],
+  "India (citizen)": [
+   "India"
+  ],
+  "Indian / India, France (student visa)": [
+   "India"
+  ],
+  "India (passport holder) | France (Student Visa)": [
+   "India"
+  ],
+  "Brazilian, European Union (long term student visa)": [
+   "Brazil"
+  ],
+  "Lebanese, Work Authorization: Lebanon, France": [
+   "Lebanon"
+  ],
+  "Taiwanese; Work Authorization: Taiwan": [
+   "Taiwan"
+  ],
+  "Spanish nationality with Settled Status in the UK": [
+   "Spain"
+  ],
+  "Lebanese / France (student visa valid until December 2026)": [
+   "Lebanon"
+  ],
+  "Chinese / Authorized to work in China": [
+   "China"
+  ],
+  "Lebanese, authorised to work in France": [
+   "Lebanon"
+  ]
+ },
+ "companies": {
+  "WORKXPAND": "WorkXpand",
+  "BRITISH AMERICAN TOBACCO": "British American Tobacco",
+  "SHOPUP": "ShopUp",
+  "Deloitte LLP": "Deloitte",
+  "DELOITTE": "Deloitte",
+  "DELOITTE LLP": "Deloitte",
+  "LEADERSHIP EXPERIENCE – VOLUNTEER": "Leadership Experience – Volunteer",
+  "AF CONSULTING": "AF Consulting",
+  "ILLUMINEM": "illuminem",
+  "KEARNEY": "Kearney",
+  "ENDESA": "Endesa",
+  "TRATO TLV": "Trato Tlv",
+  "McKinsey and Company": "McKinsey & Company",
+  "J.P. MORGAN": "J.P. Morgan",
+  "hp": "HP Inc",
+  "LEADERSHIP EXPERIENCE": "Leadership Experience",
+  "Byblos Bank": "Byblos Bank Group",
+  "TECHNICAL PROJECTS": "Technical Projects",
+  "Pegaso Sistemi Srl Coggiola(BI) - Italy": "Pegaso Sistemi Srl Coggiola (BI) - Italy",
+  "MIDDLEBURY INVESTMENT Brussels, Belgium/ New": "MIDDLEBURY INVESTMENT Brussels, Belgium / New",
+  "BACKMARKET": "Backmarket",
+  "AVOLTA PARTNERS": "Avolta Partners",
+  "Arthur D Little": "Arthur D. Little",
+  "RATESDOTCA": "RATESDOTCA Group Ltd.",
+  "MET GROUP": "MET Group",
+  "LEADERSHIP, STARTUP AND NGO EXPERIENCE": "Leadership, Startup And Ngo Experience",
+  "NUBANK": "Nubank",
+  "UNILEVER PLC": "Unilever",
+  "UNILEVER": "Unilever",
+  "Bainbridge": "Bainbridge Inc.",
+  "THUSO": "Thuso",
+  "CARFAX PROJECTS": "Carfax Projects",
+  "INFRANTRY, SWISS ARMED FORCES": "Infrantry, Swiss Armed Forces",
+  "Tesla": "Tesla, Inc.",
+  "CAMEROON REAL ESTATE COMPANY (SIC)": "Cameroon Real Estate Company (Sic)",
+  "BAIN & COMPANY": "Bain & Company",
+  "Bain and Company": "Bain & Company",
+  "ESCEND": "Escend",
+  "ADVIK HIGH TECH PVT LTD": "Advik High Tech Pvt Ltd",
+  "RAEON": "Raeon",
+  "ARRIVAL": "Arrival",
+  "IGMR, RWTH": "Igmr, Rwth",
+  "KUKA AG": "Kuka Ag",
+  "KUKA": "Kuka Ag",
+  "PRO BONO": "Pro Bono",
+  "Ion Asset Management": "ION Asset Management",
+  "Strategy&, part of the PwC network": "Strategy& - Part of the PwC Network",
+  "Strategy& (Part of the PwC Network)": "Strategy& - Part of the PwC Network",
+  "SEVEN Retail Group": "Seven Retail Group",
+  "NAS ACADEMY": "Nas Academy",
+  "Salesforce": "SALESFORCE inc.",
+  "L'OREAL": "L'Oreal",
+  "DELOITTE CONSULTING": "Deloitte",
+  "Deloitte Consulting": "Deloitte",
+  "KPMG Singapore": "KPMG LLP Singapore",
+  "Siemens": "Siemens AG",
+  "RICHFIELD AUTOMATION LTD": "Richfield Automation Ltd",
+  "ERNST & YOUNG LLP": "EY",
+  "Ernst & Young": "EY",
+  "Ernst & Young LLP": "EY",
+  "TRUIST FINANCIAL CORPORATION": "Truist Financial Corporation",
+  "MAJID AL FUTTAIM - CARREFOUR": "Majid Al Futtaim - Carrefour",
+  "FLIPKART PVT. LTD": "Flipkart",
+  "MU SIGMA INC": "Mu Sigma Inc.",
+  "ENTREPRENEURIAL EXPERIENCE": "Entrepreneurial Experience",
+  "ROLAND BERGER": "Roland Berger",
+  "SIMON KUCHER & PARTNERS": "Simon-Kucher & Partners",
+  "VOLKSWAGEN AG": "Volkswagen AG",
+  "DRM, DR MUELLER AG": "Drm, Dr Mueller Ag",
+  "Euroseas Ltd": "Euroseas Ltd.",
+  "Crowe": "ΣΟΛ Crowe",
+  "TOMTOM": "TomTom",
+  "MAYBANK MARKETING": "Maybank Marketing",
+  "FLEET COMPLETE": "Fleet Complete",
+  "JR. PEACEMAKERS": "Jr. Peacemakers",
+  "ENTREPRENEURSHIP EXPERIENCE": "Entrepreneurship Experience",
+  "ICF INTERNATIONAL": "Icf International",
+  "CIVICMOXIE LLC": "Civicmoxie Llc",
+  "CITI": "Citi",
+  "RICHEMONT": "Richemont",
+  "LEE AND HAN": "Lee And Han",
+  "HEARST": "Hearst",
+  "SHINSEGAE": "Shinsegae",
+  "JUSTICE INVESTMENTS": "Justice Investments",
+  "ISRAEL STATE ATTORNEY'S OFFICE-TAXATION & ECONOMICS DIVISION": "Israel State Attorney'S Office-Taxation & Economics Division",
+  "EXTRACURRICULAR & LEADERSHIP EXPERIENCE": "Extracurricular & Leadership Experience",
+  "EY-PARTHENON": "EY-Parthenon",
+  "EY Parthenon": "EY-Parthenon",
+  "BIP - BUSINESS INTEGRATION PARTNERS": "Bip - Business Integration Partners",
+  "ACCOMPANY": "accompany",
+  "Accenture": "Accenture GmbH",
+  "ACCENTURE": "Accenture GmbH",
+  "Accenture Plc.": "Accenture GmbH",
+  "EFFICIO": "Efficio",
+  "DESTER, GATEGROUP": "Dester, Gategroup",
+  "INTERNSHIPS": "Internships",
+  "KLARNA": "Klarna",
+  "THE/NUDGE INSTITUTE": "The/Nudge Institute",
+  "HARAPPA EDUCATION": "Harappa Education",
+  "MIQ DIGITAL": "Miq Digital",
+  "SCHNEIDER ELECTRIC": "Schneider Electric",
+  "FINN GMBH": "Finn Gmbh",
+  "FINN": "Finn Gmbh",
+  "AUSTRALIA WALKABOUT WILDLIFE PARK & SANCTUARY": "Australia Walkabout Wildlife Park & Sanctuary",
+  "MINISTRY OF JUSTICE AND PUBLIC SECURITY": "Ministry Of Justice And Public Security",
+  "ELDEN ADVOKATFIRMA DA": "Elden Advokatfirma Da",
+  "ORGANIZATIONAL ENGAGEMENT & LEADERSHIP": "Organizational Engagement & Leadership",
+  "SOCIETE GENERALE": "Societe Generale",
+  "BOISSONS DU CAMEROUN": "Boissons Du Cameroun",
+  "Hyundai Motor Company": "Hyundai Motor Company (현대자동차)",
+  "UCSB CAMPUS LEARNING ASSISTANT SERVICES": "Ucsb Campus Learning Assistant Services",
+  "Robert Bosch AG": "Robert Bosch GmbH",
+  "PROCTER & GAMBLE": "Procter & Gamble",
+  "RIMAC SEGUROS Y REASEGUROS": "Rimac Seguros y Reaseguros",
+  "Europump International": "Europump International Group",
+  "Productsup": "ProductsUp GmbH",
+  "MONITOR DELOITTE": "Monitor Deloitte",
+  "TV Asahi": "TV Asahi Holdings Corporation",
+  "COFINAIR Group": "Cofinair Group",
+  "JPMorgan Chase & Co": "JPMorgan Chase & Co.",
+  "Financial Laboratory": "Financial Laboratory LLC",
+  "Kasko 2015": "Kasko 2015 LTD",
+  "OTHER EXPERIENCES AND COURSES": "Other Experiences And Courses",
+  "APONIA": "Aponia",
+  "EASYHOTEL": "Easyhotel",
+  "DELOITTE FINANCE": "Deloitte Finance",
+  "PricewaterhouseCoopers": "PwC",
+  "BIRKENSTOCK": "Birkenstock",
+  "STRATEGY&": "Strategy&",
+  "ATLEIN": "Atlein",
+  "Iberdrola Renovables": "Iberdrola Renovables SA",
+  "Global Interconnection Group": "Global InterConnection Group",
+  "MINING INDUSTRY INDONESIA (MIND ID)": "Mining Industry Indonesia (Mind Id)",
+  "PROJECT REFORMED EVANGELICAL CHURCH OF INDONESIA BATAM": "Project Reformed Evangelical Church of Indonesia Batam",
+  "SK": "SK Inc.",
+  "Plutus Capital NY": "Plutus Capital NY Inc.",
+  "WORLD FOOD PROGRAMME – UNITED NATIONS": "World Food Programme – United Nations",
+  "MIROW & CO.": "Mirow & Co",
+  "QUMMIF": "Qummif",
+  "MERLIN Properties": "Merlin Properties",
+  "NTT DATA": "NTT Data",
+  "DAIKIN EUROPE": "Daikin Europe",
+  "DAIKIN MIDDLE EAST & AFRICA": "Daikin Middle East and Africa",
+  "MAYA VR": "Maya Vr",
+  "COLCA CAPITAL": "Colca Capital",
+  "BONAPHARM": "Bonapharm",
+  "APOYO FINANZAS CORPORATIVAS": "Apoyo Finanzas Corporativas",
+  "ITAU BBA": "Itau Bba",
+  "TRAFIGURA": "Trafigura",
+  "JOHNSON & JOHNSON CONSUMER HEALTH": "Johnson & Johnson Consumer Health",
+  "ERNO LASZLO NEW YORK": "Erno Laszlo New York",
+  "A.T. Kearney": "A.T. Kearney GmbH",
+  "mymun": "MyMUN GmbH",
+  "INTERNSHIP EXPERIENCE": "Internship Experience",
+  "Swan Wealth Management": "SWAN Wealth Management",
+  "OCO GLOBAL": "OCO Global",
+  "RiskQuest": "Riskquest",
+  "YUANTA FINANCIAL": "Yuanta Financial Holdings Co.",
+  "CAPITAL": "Capital",
+  "CITIBANK": "Citibank",
+  "B RISTOL-MYERS SQUIBB": "B Ristol-Myers Squibb",
+  "M EDICAL OBSERVER": "M Edical Observer",
+  "C OMMUNITY PHARMACY": "C Ommunity Pharmacy",
+  "PLS LOGISTICS": "Pls Logistics",
+  "Tenon Construction Pte Ltd.": "Tenon Construction Ltd. Pte.",
+  "COMMUNITY SERVICE": "Community Service",
+  "KEARNEY MIDDLE EAST": "Kearney Middle East",
+  "UBER MIDDLE EAST": "Uber Middle East",
+  "NUSANED LEBANON": "Nusaned Lebanon",
+  "INDOCEMENT- PART OF HEIDELBERG MATERIALS AG": "Indocement- Part Of Heidelberg Materials Ag",
+  "PIONIRBETON INDUSTRI (READY MIXED CONCRETE)": "Pionirbeton Industri (Ready Mixed Concrete)",
+  "SKHA CONSULTING": "Skha Consulting",
+  "STONE CO": "Stone Co",
+  "PWC (PRICEWATERHOUSECOOPERS)": "PwC (PricewaterhouseCoopers)",
+  "Gartner": "Gartner, Inc",
+  "MORGAN STANLEY": "Morgan Stanley",
+  "Aurecon": "Aurecon Group",
+  "PerkinElmer": "PerkinElmer, Inc.",
+  "TATA AIG General Insurance Company": "TATA AIG General Insurance Company Limited",
+  "IRSHAD ELECTRONICS LLC": "Irshad Electronics Llc",
+  "AzerGOLD CJSC": "\"AzerGold\"​ CJSC",
+  "WEGMANN automotive GmbH": "Wegmann automotive GmbH",
+  "HEARTMAN HOUSE CONSULTING": "Heartman House Consulting",
+  "DHL LOGISTICS": "Dhl Logistics",
+  "SEVEN INVESTMENT MANAGEMENT (7IM)": "Seven Investment Management (7Im)",
+  "OFFICE OF RAIL AND ROADS (ORR)": "Office Of Rail And Roads (Orr)",
+  "ALLIANCE RENAULT NISSAN MITSUBISHI": "Alliance Renault Nissan Mitsubishi",
+  "BRIONI": "Brioni",
+  "YOMONI": "Yomoni",
+  "AVIVA INVESTORS": "Aviva Investors",
+  "YNÉSUELVES": "Ynésuelves",
+  "CITIGROUP": "Citigroup",
+  "BANCO SANTANDER": "Banco Santander",
+  "ACCIONA": "Acciona",
+  "APPIAN UK": "Appian Uk",
+  "BNP PARIBAS": "BNP Paribas",
+  "RENTA 4 BANCO": "Renta 4 Banco",
+  "OBOLUS CRYPTO": "Obolus Crypto",
+  "M UREX": "M Urex",
+  "A REVA": "A Reva",
+  "GROUP-IPS": "Group-Ips",
+  "MARRIOTT INTERNATIONAL": "Marriott International",
+  "Oracle": "Oracle Corporation",
+  "MasterCard": "Mastercard",
+  "causaLens": "Causalens",
+  "Drobo Inc": "Drobo, Inc.",
+  "Sitecore": "Sitecore Inc",
+  "ALFIC": "Alfic",
+  "JOSONS": "Josons",
+  "SHELL": "Shell",
+  "OIG FAMILY OFFICE": "Oig Family Office",
+  "Stars Investment Management": "STARS Investment Management Co.",
+  "WORLD MUSIC INSTITUTE": "World Music Institute",
+  "Egis": "Egis Group",
+  "Plume Design": "Plume Design, Inc",
+  "ROYWOODS RESTAURANT": "Roywoods Restaurant",
+  "Apple": "Apple Inc.",
+  "Freelance": "freelance",
+  "DAMAC": "Damac",
+  "PMI Electro Mobility Solutions": "PMI Electro Mobility Solutions Private Limited",
+  "Argus Partners, Solicitors & Advocates": "Argus Partners (Solicitors & Advocates)",
+  "Oracle India Pvt. Ltd": "Oracle India Private Limited",
+  "STUDIO360": "Studio360",
+  "DOT LINE PLANE": "Dot Line Plane Co. Ltd.",
+  "APPLIED PHYSICAL SCIENCES CORPORATION": "Applied Physical Sciences Corporation",
+  "AUDI AG": "Audi Ag",
+  "EXTRACURRICULAR": "Extracurricular",
+  "FENERGO": "Fenergo",
+  "CANALYS": "Canalys",
+  "FEDERATION FRANCAISE DE TENNIS": "Federation Francaise De Tennis",
+  "Hill International": "Hill International, Inc.",
+  "Standard Steel KZ LLP (family office portfolio company)": "Standard Steel KZ LLP - Family Office Portfolio Company",
+  "Technosoft Inc.": "TechnoSoft Inc.",
+  "VTB CAPITAL": "VTB Capital",
+  "SBERBANK CIB": "Sberbank Cib",
+  "United Overseas Bank (UOB)": "United Overseas Bank Limited (UOB)",
+  "JPMorgan Chase": "J.P. Morgan",
+  "Wipro": "Wipro Limited",
+  "R&B INVESTMENT": "R&B Investment",
+  "FINCLEY CONSULTING": "Fincley consulting",
+  "PROFESSIONAL BADMINTON ATHLETE": "Professional Badminton Athlete",
+  "KREATIVE KULTURE LIMITED": "Kreative Kulture Limited",
+  "Varma & Varma Chartered Accountants": "Varma & Varma, Chartered Accountants",
+  "EXTRA CIRRCULAR ACTIVITIES": "Extra Cirrcular Activities",
+  "FADEL": "Fadel",
+  "MANAGEMENT SOLUTIONS EXPERTS (MSE)": "Management Solutions Experts (Mse)",
+  "YCP SOLIDIANCE": "Ycp Solidiance",
+  "MELANION CAPITAL": "Melanion Capital",
+  "GUANABANA RESORT": "Guanabana Resort",
+  "RESEARCH ASSISTANT": "Research Assistant",
+  "Dr.Reddy’s Laboratories": "Dr. Reddy's Laboratories",
+  "LEADERSHIP & ACTIVITIES": "Leadership & Activities",
+  "CLINTON HEALTH ACCESS INITIATIVE (CLINTON FOUNDATION)": "Clinton Health Access Initiative (Clinton Foundation)",
+  "JP MORGAN CHASE AND CO.": "Jp Morgan Chase And Co.",
+  "SEA AND BEYOND": "Sea And Beyond",
+  "DOLBIX CONSULTING INC": "Dolbix Consulting Inc",
+  "LIFERAY": "Liferay",
+  "JP TOKYO & CO. INC": "JP Tokyo & Co. Inc.",
+  "TECHFIRM HOLDINGS INC": "Techfirm",
+  "Yun Horse club": "Yun Horse Club",
+  "Shanghai Loukou Ecommerce Co. Ltd": "Shanghai Loukou ECommerce Co., Ltd.",
+  "OTHER EXPERIENCES": "Other Experiences",
+  "COMMUNITY EXPERIENCE": "Community Experience",
+  "Doctor Kitchen": "Doctor Kitchen (닥터키친)",
+  "MONDELEZ": "Mondelez",
+  "Walmart": "Walmart Inc.",
+  "ALVAREZ & MARSAL (A&M INFRA)": "Alvarez & Marsal (A&M Infra)",
+  "JGP ASSET MANAGEMENT": "Jgp Asset Management",
+  "HOMBURGER": "Homburger",
+  "CRIMINAL COURT BASEL-CITY": "Criminal Court Basel-City",
+  "KELLERHALS CARRARD": "Kellerhals Carrard",
+  "NOVARTIS PHARMA": "Novartis Pharma",
+  "CIVIL COURT BASEL-COUNTRY WEST": "Civil Court Basel-Country West",
+  "GlobalData Plc": "GlobalData plc",
+  "Genentech": "Genentech Inc.",
+  "Multiversity": "Multiversity Group",
+  "INTERNSHIP": "Internship",
+  "COMMUNITY LEADERSHIP": "Community Leadership",
+  "UNICREDIT BOSNIA-HERZEGOVINA": "Unicredit Bosnia-Herzegovina",
+  "WELLS FARGO BANK,": "Wells Fargo Bank,",
+  "ITANI GROUP HOLDING S.A.L. Lebanon & GCC": "Itani Group Holding S.A.L. Lebanon & GCC",
+  "Woody, Startup": "Woody (Startup)",
+  "Ina Energy Corp. 寶晶能源": "Ina Energy Corporation",
+  "KERING JAPAN JAPAN": "Kering Japan Japan",
+  "JAPAN": "Japan",
+  "INSEAD": "Insead",
+  "KPMG US": "Kpmg Us",
+  "CHIVAS FC": "Chivas Fc",
+  "PEGASO SISTEMI SRL": "Pegaso Sistemi Srl",
+  "DNV GL": "Dnv Gl",
+  "AIESEC": "Aiesec",
+  "POLITICO": "Politico",
+  "SAKR HOLDING": "Sakr Holding",
+  "ESCEND_UK": "Escend_Uk",
+  "ACELERON": "Aceleron",
+  "YOURNEST CAPITAL ADVISORS PRIVATE LIMITED": "Yournest Capital Advisors Private Limited",
+  "S.F. LEE & CO": "S.F. Lee & Co",
+  "INESC TEC": "Inesc Tec",
+  "SITTI": "Sitti",
+  "HANSTYLE": "Hanstyle",
+  "VALEX COMPLIANCE LLC": "Valex Compliance Llc",
+  "COASTAL CAROLINA OB-GYN, L.L.C.": "Coastal Carolina Ob-Gyn, L.L.C.",
+  "PRAGMATIS+": "Pragmatis+",
+  "spot educação": "Spot Educação",
+  "BRMALLS": "Brmalls",
+  "CAYPE ABOGADOS": "Caype Abogados",
+  "E-SPO": "E-Spo",
+  "WESTMONT JAPAN INVESTMENTS": "Westmont Japan Investments",
+  "ENGIE": "Engie",
+  "ARCI IBERICA, S.A.": "Arci Iberica, S.A.",
+  "SEPHORA": "Sephora",
+  "JEN HANSEN": "Jen Hansen",
+  "JD.COM": "Jd.Com",
+  "BODEGAS RAMON BILBAO SA": "Bodegas Ramon Bilbao Sa",
+  "ICADE": "Icade",
+  "COLAS": "Colas",
+  "MAHOLA HOTESSES": "Mahola Hotesses",
+  "ERNO LASZLO": "Erno Laszlo",
+  "BFREE": "Bfree",
+  "AGR-AM": "Agr-Am",
+  "SAUGO 360": "Saugo 360",
+  "N3XUS ETSII": "N3Xus Etsii",
+  "TISVA": "Tisva",
+  "OECD - OCDE": "Oecd - Ocde",
+  "KENGO KUMA & ASSOCIATES": "Kengo Kuma & Associates",
+  "UNOPS": "Unops",
+  "MDLBEAST": "Mdlbeast",
+  "MBC GROUP": "Mbc Group",
+  "TELUS": "Telus",
+  "PRISM": "Prism",
+  "IQVIA": "Iqvia",
+  "ELSAUC3M": "Elsauc3M",
+  "ADM, ADMINISTRACION DESARROLLO MANAGEMENT, S.L.": "Adm, Administracion Desarrollo Management, S.L.",
+  "BOMBARDIER": "Bombardier",
+  "BCG": "Boston Consulting Group",
+  "PEAQOCK": "Peaqock",
+  "EPAM NEORIS": "Epam Neoris",
+  "24SEVEN 🚀": "24Seven 🚀",
+  "ZEQUENZ INTERNATIONAL CO., LTD.": "Zequenz International Co., Ltd.",
+  "MARAN GAS MARITIME INC.": "Maran Gas Maritime Inc.",
+  "MOTONIUS": "Motonius",
+  "WINLEB": "Winleb",
+  "ELEVEN01": "Eleven01",
+  "UOB": "United Overseas Bank",
+  "AUBMC": "Aubmc",
+  "AECOM": "Aecom",
+  "HAPPI OHA": "Happi Oha",
+  "PESCHAUD INTERNATIONAL": "Peschaud International",
+  "RAZEL-BEC": "Razel-Bec",
+  "XCOM RAN": "Xcom Ran",
+  "BERGÉ": "Bergé",
+  "TNB AURA": "Tnb Aura",
+  "BAT": "British American Tobacco"
+ },
+ "skills": {
+  "Excel)": "Excel",
+  "PowerPoint)": "PowerPoint",
+  "Powerpoint": "PowerPoint",
+  "Powerpoint)": "PowerPoint",
+  "Alteryx)": "Alteryx",
+  "C++)": "C++",
+  "VBA)": "VBA",
+  "MS Office": "Microsoft Office",
+  "MS office": "Microsoft Office",
+  "MATLAB": "Matlab",
+  "PowerBi": "Power BI",
+  "PowerBI": "Power BI",
+  "AutoCad": "AutoCAD",
+  "Sap 2000": "SAP 2000",
+  "financial modelling": "Financial Modeling",
+  "Financial Modelling": "Financial Modeling",
+  "Financial modelling": "Financial Modeling",
+  "data analysis": "Data Analysis",
+  "Data analysis": "Data Analysis",
+  "JIRA": "Jira",
+  "HubSpot)": "HubSpot",
+  "Microsoft Office Suite": "Microsoft Office suite",
+  "MS Excel": "Excel",
+  "LabVIEW": "LABView",
+  "Labview": "LABView",
+  "R)": "R",
+  "JAVA": "Java",
+  "PitchBook": "Pitchbook",
+  "html": "HTML",
+  "Financial modeling": "Financial Modeling",
+  "Project management": "Project Management",
+  "c#": "C#",
+  "Microsoft Excel": "Excel",
+  "Project Finance)": "Project Finance",
+  "presentations": "Public Speaking",
+  "Presentations": "Public Speaking",
+  "Python Programming": "Python",
+  "MySQL": "SQL",
+  "SOLIDWORKS": "SolidWorks",
+  "Solidworks": "SolidWorks",
+  "Problem solving": "Problem Solving",
+  "stakeholder management": "Stakeholder Management",
+  "leadership": "Leadership",
+  "Financial analysis": "Financial Analysis",
+  "financial analysis": "Financial Analysis",
+  "Market Assessment": "Market assessment",
+  "Stakeholder engagement": "Stakeholder Engagement",
+  "financial reporting": "Financial Reporting",
+  "PPT": "PowerPoint",
+  "DCF)": "DCF",
+  "Python (advanced)": "Python (Advanced)",
+  "Word)": "Word",
+  "CSS)": "CSS",
+  "STATA": "Stata",
+  "Due diligence": "Due Diligence",
+  "Market research": "Market Research",
+  "valuation": "Valuation",
+  "analytics": "Analytics",
+  "corporate finance": "Corporate Finance",
+  "economic analysis": "Economic Analysis",
+  "S&P Capital IQ": "Capital IQ",
+  "Advanced Excel": "Excel",
+  "Vlookup": "VLOOKUP)",
+  "MS Word": "Word",
+  "MS PowerPoint": "PowerPoint",
+  "Excel/VBA": "VBA",
+  "Scikit-Learn": "Scikit Learn",
+  "Business planning": "Business Planning",
+  "Strategic planning": "Strategic Planning",
+  "Public speaking": "Public Speaking",
+  "teamwork": "Teamwork",
+  "Event planning": "Event Planning",
+  "Go-to-market Strategy": "Go-to-Market Strategy",
+  "Management consulting": "Management Consulting",
+  "Microsoft PowerPoint": "PowerPoint",
+  "marketing": "Marketing",
+  "Microsoft Word": "Word",
+  "Private equity": "Private Equity",
+  "Data Analytics": "Data Analysis",
+  "Time management": "Time Management",
+  "Customer engagement": "Customer Engagement",
+  "Team work": "Team Work",
+  "start-ups": "Start-ups",
+  "Multi-channel Marketing": "Multi-Channel Marketing",
+  "editing": "Editing",
+  "cloud": "Cloud",
+  "E-commerce": "E-Commerce",
+  "Team building": "Team Building",
+  "Strategy consulting": "Strategy Consulting",
+  "team management": "Team Management",
+  "Bloomberg Terminal": "Bloomberg",
+  "Non-Profit-Management": "Non-profit Management",
+  "Supply Chain Management": "Supply Chain",
+  "Artificial Intelligence": "AI",
+  "chinese": "Chinese",
+  "Big data": "Big Data",
+  "Inglês": "Inglés",
+  "MS 엑셀": "MS 워드",
+  "MS 오피스": "MS 워드",
+  "crm": "CRM",
+  "Sales operations": "Sales Operations",
+  "Real estate": "Real Estate",
+  "supply chain": "Supply Chain",
+  "Workshop Facilitation": "Workshop facilitation",
+  "Mergers & Acquisitions": "M&A",
+  "digital transformation": "Digital Transformation",
+  "korean": "Korean"
+ }
+}

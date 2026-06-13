@@ -1,0 +1,34 @@
+[
+  {
+    "mode": "monthly",
+    "cookie_ok": false,
+    "updated": false,
+    "ran_at": "2026-06-12T07:40:04.768420Z"
+  },
+  {
+    "mode": "check-only",
+    "cookie_ok": true,
+    "ran_at": "2026-06-12T07:39:42.107482Z"
+  },
+  {
+    "mode": "monthly",
+    "cookie_ok": false,
+    "updated": false,
+    "ran_at": "2026-06-12T07:36:14.393443Z"
+  },
+  {
+    "mode": "check-only",
+    "cookie_ok": false,
+    "ran_at": "2026-06-12T07:35:54.596217Z"
+  },
+  {
+    "mode": "check-only",
+    "cookie_ok": true,
+    "ran_at": "2026-06-12T07:33:53.579589Z"
+  },
+  {
+    "mode": "check-only",
+    "cookie_ok": false,
+    "ran_at": "2026-06-12T07:25:14.397986Z"
+  }
+]

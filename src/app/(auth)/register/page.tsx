@@ -2,7 +2,7 @@
 
 export const dynamic = 'force-dynamic'
 
-import { useState, useTransition } from 'react'
+import { useState, useTransition, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { createClient } from '@/lib/supabase/client'
@@ -52,6 +52,14 @@ export default function RegisterPage() {
   const [error, setError] = useState<string | null>(null)
   const [isPending, startTransition] = useTransition()
   const [isLoading, setIsLoading] = useState(false)
+  const [resendCooldown, setResendCooldown] = useState(0)
+
+  // Countdown timer for resend cooldown
+  useEffect(() => {
+    if (resendCooldown <= 0) return
+    const t = setTimeout(() => setResendCooldown((c) => c - 1), 1000)
+    return () => clearTimeout(t)
+  }, [resendCooldown])
 
   // Step 1: search for name
   const handleSearch = () => {
@@ -97,6 +105,7 @@ export default function RegisterPage() {
     }
 
     setIsLoading(false)
+    setResendCooldown(60)
     setStep(3)
   }
 
@@ -312,18 +321,24 @@ export default function RegisterPage() {
           </button>
 
           <h1 className="text-2xl font-bold text-gray-900 mb-1">Check your inbox</h1>
-          <p className="text-sm text-gray-500 mb-6">
-            We&apos;ve sent a verification code to{' '}
+          <p className="text-sm text-gray-500 mb-4">
+            We&apos;ve sent a 6-digit code to{' '}
             <span className="font-medium text-gray-900">{maskEmail(selected.inseadEmail)}</span>.
-            Enter it below.
           </p>
+
+          <div className="mb-4 p-3 rounded-md bg-amber-50 border border-amber-200 text-xs text-amber-800 space-y-1">
+            <p className="font-semibold">Email not arriving?</p>
+            <p>• Check your <span className="font-medium">Junk / Spam</span> folder — corporate email filters often catch it</p>
+            <p>• It may take <span className="font-medium">1–2 minutes</span> to arrive</p>
+            <p>• If your INSEAD inbox has strict filtering, try the <span className="font-medium">Outlook web app</span> and check Junk</p>
+          </div>
 
           <Input
             label="Verification code"
             type="text"
             inputMode="numeric"
             maxLength={8}
-            placeholder="Enter the code from your email"
+            placeholder="Enter the 6-digit code"
             value={otp}
             onChange={(e) => setOtp(e.target.value.replace(/\D/g, '').slice(0, 8))}
           />
@@ -350,9 +365,10 @@ export default function RegisterPage() {
               setError(null)
               handleSendOtp()
             }}
-            className="w-full mt-3 text-sm text-gray-500 hover:text-[#003781]"
+            disabled={resendCooldown > 0}
+            className="w-full mt-3 text-sm text-gray-500 hover:text-[#003781] disabled:opacity-40 disabled:cursor-not-allowed"
           >
-            Resend code
+            {resendCooldown > 0 ? `Resend code in ${resendCooldown}s` : 'Resend code'}
           </button>
         </div>
       )}

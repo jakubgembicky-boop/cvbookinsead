@@ -35,7 +35,7 @@ interface CanonMaps {
 function loadCanon(): CanonMaps {
   if (!_canon) {
     try {
-      _canon = JSON.parse(fs.readFileSync(resolveDataPath('canon.json'), 'utf-8')) as CanonMaps
+      _canon = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'canon.json'), 'utf-8')) as CanonMaps
     } catch {
       _canon = { nationalities: {}, companies: {}, skills: {} }
     }
@@ -64,7 +64,7 @@ function loadDerivedSkills(): Record<string, string[]> {
   if (!_derivedSkills) {
     try {
       _derivedSkills = JSON.parse(
-        fs.readFileSync(resolveDataPath('skills_derived.json'), 'utf-8')
+        fs.readFileSync(path.join(process.cwd(), 'data', 'skills_derived.json'), 'utf-8')
       ) as Record<string, string[]>
     } catch {
       _derivedSkills = {}
@@ -73,13 +73,29 @@ function loadDerivedSkills(): Record<string, string[]> {
   return _derivedSkills
 }
 
+let _clubRoles: Record<string, { club: string; role: string }[]> | null = null
+
+/** club_roles.json — INSEAD club leadership positions keyed by insead email. */
+function loadClubRoles(): Record<string, { club: string; role: string }[]> {
+  if (!_clubRoles) {
+    try {
+      _clubRoles = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), 'data', 'club_roles.json'), 'utf-8')
+      ) as Record<string, { club: string; role: string }[]>
+    } catch {
+      _clubRoles = {}
+    }
+  }
+  return _clubRoles
+}
+
 let _categorizedSkills: Record<string, Record<string, 'strong' | 'normal' | 'beginner'>> | null = null
 
 function loadCategorizedSkills(): Record<string, Record<string, 'strong' | 'normal' | 'beginner'>> {
   if (!_categorizedSkills) {
     try {
       _categorizedSkills = JSON.parse(
-        fs.readFileSync(resolveDataPath('skills_categorized.json'), 'utf-8')
+        fs.readFileSync(path.join(process.cwd(), 'data', 'skills_categorized.json'), 'utf-8')
       ) as Record<string, Record<string, 'strong' | 'normal' | 'beginner'>>
     } catch {
       _categorizedSkills = {}
@@ -88,9 +104,12 @@ function loadCategorizedSkills(): Record<string, Record<string, 'strong' | 'norm
   return _categorizedSkills
 }
 
-function canonNationality(raw: string): string {
-  const mapped = loadCanon().nationalities[raw?.trim()]
-  return mapped && mapped.length ? mapped.join(' / ') : raw
+function canonNationalities(raw: string | string[]): string[] {
+  if (Array.isArray(raw)) return raw
+  if (!raw) return []
+  const parts = raw.split(/[;,]/).map(p => p.trim()).filter(Boolean)
+  const mapped = parts.flatMap(p => loadCanon().nationalities[p] || p)
+  return Array.from(new Set(mapped))
 }
 
 // ─────────────────────────────────────────────
@@ -227,7 +246,7 @@ function fixKey(cv: CvProfile): string {
 function applyCvFixes(cvs: CvProfile[]): CvProfile[] {
   let fixes: Record<string, Partial<CvProfile>> = {}
   try {
-    fixes = JSON.parse(fs.readFileSync(resolveDataPath('cv_fixes.json'), 'utf-8'))
+    fixes = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'cv_fixes.json'), 'utf-8'))
   } catch {
     return cvs
   }
@@ -241,7 +260,7 @@ function loadCv(): CvProfile[] {
   if (!_cv) {
     try {
       _cv = applyCvFixes(
-        JSON.parse(fs.readFileSync(resolveDataPath('cvdata.json'), 'utf-8')) as CvProfile[]
+        JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'cvdata.json'), 'utf-8')) as CvProfile[]
       )
     } catch {
       _cv = []
@@ -254,7 +273,7 @@ function loadLi(): Record<string, LinkedInEntry> {
   if (!_li) {
     try {
       _li = JSON.parse(
-        fs.readFileSync(resolveDataPath('linkedin_enrichment.json'), 'utf-8')
+        fs.readFileSync(path.join(process.cwd(), 'data', 'linkedin_enrichment.json'), 'utf-8')
       ) as Record<string, LinkedInEntry>
     } catch {
       _li = {}
@@ -344,17 +363,18 @@ function mergeOne(
     linkedin: pick(ov.linkedin, profile?.linkedin_url, cv.linkedin ?? ''),
     emails,
     phones,
-    nationality: canonNationality(pick(ov.nationality, profile?.nationality, cv.nationality ?? '')),
+    nationalities: pick(ov.nationalities, profile?.nationalities, canonNationalities(cv.nationality ?? '')),
     languages: pick(ov.languages, profile?.languages?.length ? profile.languages : undefined, cv.languages ?? []),
     skills,
     categorized_skills,
-    work_auth: cv.work_auth ?? [],
+    work_permits: pick(ov.work_permits, profile?.work_permits, cv.work_auth ?? []),
     photo: photo || liPhoto,
 
     education: ov.education ?? cv.education ?? [],
     experience,
     timeline,
     educationTimeline: buildEducation(ov.education ?? cv.education ?? [], li?.li_education ?? []),
+    clubRoles: loadClubRoles()[inseadEmail.toLowerCase()] ?? [],
     extra_curricular: ov.extra_curricular ?? cv.extra_curricular ?? [],
 
     li_headline: pick(ov.li_headline, profile?.li_headline, li?.li_headline ?? ''),
@@ -416,7 +436,7 @@ export function getEnrichedForProfile(
       emails: [profile.insead_email], phones: profile.phone ? [profile.phone] : [],
       education: [], experience: [], extra_curricular: [],
       languages: profile.languages ?? [], skills: [],
-      nationality: profile.nationality ?? '', work_auth: [], photo: profile.photo_url, page: 0,
+      nationality: profile.nationalities?.[0] ?? '', work_auth: profile.work_permits ?? [], photo: profile.photo_url, page: 0,
     }
     return mergeOne(empty, undefined, profile, currentUserId)
   }

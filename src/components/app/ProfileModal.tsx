@@ -55,10 +55,13 @@ export function ProfileModal({
     : (cv.education || []).map((e) => ({ ...e, source: 'cv' as const }))
 
   // Languages: prefer the richer of CV vs LI, with robust multi-language parsing
+  // Sort by proficiency: C2 > C1 > B2 > B1 > A2 > A1 > unknown
+  const CEFR_ORDER: Record<string, number> = { C2: 6, C1: 5, B2: 4, B1: 3, A2: 2, A1: 1 }
   const cvLangs = cv.languages || []
   const liLangs = cv.li_languages || []
   const effectiveLangs = cvLangs.length >= liLangs.length ? cvLangs : liLangs
   const langDisplay = parseAllLanguages(effectiveLangs)
+    .sort((a, b) => (CEFR_ORDER[b.cefr?.toUpperCase() ?? ''] ?? 0) - (CEFR_ORDER[a.cefr?.toUpperCase() ?? ''] ?? 0))
     .map((p) => p.display)
     .join(', ')
 

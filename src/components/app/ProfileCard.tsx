@@ -139,8 +139,13 @@ export function ProfileCard({
   const { company, role } = preInseadRole(cv)
 
   // Top 3 languages with CEFR for colour-coding (compound entries split out)
+  // Sort by proficiency: C2 > C1 > B2 > B1 > A2 > A1 > unknown
+  const CEFR_ORDER: Record<string, number> = { C2: 6, C1: 5, B2: 4, B1: 3, A2: 2, A1: 1 }
   const rawLangs = cv.languages?.length ? cv.languages : cv.li_languages
-  const langs = parseAllLanguages(rawLangs).slice(0, 3)
+  const langs = parseAllLanguages(rawLangs)
+    .sort((a, b) => (CEFR_ORDER[a.cefr?.toUpperCase() ?? ''] ?? 0) - (CEFR_ORDER[b.cefr?.toUpperCase() ?? ''] ?? 0))
+    .reverse()
+    .slice(0, 3)
 
   return (
     // div+role rather than <button> so the star can be a real nested button

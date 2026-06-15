@@ -351,8 +351,10 @@ export function SwitchClient({
                 <div>
                   <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Your Profile</p>
                   <div className="flex flex-col gap-1.5">
-                    {self && (self.skills ?? []).length > 0 ? (
-                      Array.from(new Set(self.skills)).map((skill) => {
+                    {self && ((() => {
+                      const allSkills = Array.from(new Set([...(self.skills ?? []), ...(self.li_skills ?? [])]))
+                      return allSkills.length > 0 ? (
+                      allSkills.map((skill) => {
                         const str = self.categorized_skills?.[skill] || 'normal'
                         const isStrong = str === 'strong'
                         const isBeginner = str === 'beginner'
@@ -366,7 +368,8 @@ export function SwitchClient({
                       })
                     ) : (
                       <p className="text-xs text-gray-400 italic">No skills listed.</p>
-                    )}
+                    );
+                    })())}
                   </div>
                 </div>
 

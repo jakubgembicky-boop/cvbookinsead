@@ -91,12 +91,41 @@ function loadClubRoles(): Record<string, { club: string; role: string }[]> {
 
 let _categorizedSkills: Record<string, Record<string, 'strong' | 'normal' | 'beginner'>> | null = null
 
+/**
+ * Load skills_categorized.json and transform from category-based format
+ * { Hard_Skills: [...], Soft_Skills: [...], Tools_Technologies: [...] }
+ * into per-skill strength levels { "Python": "strong", "Leadership": "normal" }.
+ */
 function loadCategorizedSkills(): Record<string, Record<string, 'strong' | 'normal' | 'beginner'>> {
   if (!_categorizedSkills) {
     try {
-      _categorizedSkills = JSON.parse(
+      const raw = JSON.parse(
         fs.readFileSync(path.join(process.cwd(), 'data', 'skills_categorized.json'), 'utf-8')
-      ) as Record<string, Record<string, 'strong' | 'normal' | 'beginner'>>
+      ) as Record<string, Record<string, string[]> | Record<string, 'strong' | 'normal' | 'beginner'>>
+
+      _categorizedSkills = {}
+      const CATEGORY_TO_LEVEL: Record<string, 'strong' | 'normal' | 'beginner'> = {
+        Hard_Skills: 'strong',
+        Soft_Skills: 'normal',
+        Tools_Technologies: 'beginner',
+      }
+
+      for (const [email, entry] of Object.entries(raw)) {
+        const mapped: Record<string, 'strong' | 'normal' | 'beginner'> = {}
+        // Check if it's the category-based format (has Hard_Skills key)
+        if (entry && typeof entry === 'object' && ('Hard_Skills' in entry || 'Soft_Skills' in entry || 'Tools_Technologies' in entry)) {
+          for (const [category, level] of Object.entries(CATEGORY_TO_LEVEL)) {
+            const skills = (entry as Record<string, string[]>)[category] ?? []
+            for (const skill of skills) {
+              if (skill && typeof skill === 'string') mapped[skill] = level
+            }
+          }
+        } else {
+          // Already in the expected format (skill → level)
+          Object.assign(mapped, entry)
+        }
+        _categorizedSkills[email] = mapped
+      }
     } catch {
       _categorizedSkills = {}
     }

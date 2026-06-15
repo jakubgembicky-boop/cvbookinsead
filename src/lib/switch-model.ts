@@ -286,7 +286,17 @@ function aggregateMovers(movers: Mover[]): Pick<
   }
 
   for (const m of movers) {
-    for (const s of m.skillsBeforeMove) {
+    let skillsToCount = m.skillsBeforeMove
+    if (movers.length === 1) {
+      // Re-calculate pure base skills, stripping implied skills
+      const baseSkills = new Set<string>()
+      for (const raw of [...(m.profile.skills ?? []), ...(m.profile.li_skills ?? [])]) {
+        for (const s of normalizeSkill(raw)) baseSkills.add(s)
+      }
+      skillsToCount = [...baseSkills]
+    }
+
+    for (const s of skillsToCount) {
       skillMap[s] = (skillMap[s] ?? 0) + 1
     }
 
@@ -314,7 +324,7 @@ function aggregateMovers(movers: Mover[]): Pick<
     sorted.length === 0 ? 0 : sorted.length % 2 ? sorted[mid] : (sorted[mid - 1] + sorted[mid]) / 2
 
   return {
-    commonSkills: sortTop(skillMap, 12).filter(([, n]) => n >= 2 || movers.length === 1),
+    commonSkills: sortTop(skillMap, movers.length === 1 ? 8 : 10).filter(([, n]) => n >= 2 || movers.length === 1),
     destinationEmployers: withDisplay(sortTop(destMap, 8)),
     originEmployers: withDisplay(sortTop(origMap, 8)),
     medianTenureBefore,

@@ -93,7 +93,8 @@ export interface Profile {
   li_location: string | null
   li_about: string | null
   languages: string[]
-  nationality: string | null
+  nationalities: string[]
+  work_permits: string[]
   profile_completed_at: string | null
   onboarding_step: number
   overrides?: ProfileOverrides
@@ -104,7 +105,8 @@ export interface Profile {
 // Any field a user may override on their own profile
 export interface ProfileOverrides {
   name?: string
-  nationality?: string
+  nationalities?: string[]
+  work_permits?: string[]
   languages?: string[]
   skills?: string[]
   phones?: string[]
@@ -123,6 +125,12 @@ export interface ProfileOverrides {
   [key: string]: unknown
 }
 
+/** A leadership position held in an INSEAD student club. */
+export interface ClubRole {
+  club: string
+  role: string
+}
+
 // ─────────────────────────────────────────────
 // Merged display record (CV ⊕ LinkedIn ⊕ user overrides)
 // This is the shape the directory, search engine, and modal operate on.
@@ -138,11 +146,11 @@ export interface EnrichedProfile {
   linkedin: string
   emails: string[]
   phones: string[]
-  nationality: string
+  nationalities: string[]
   languages: string[]
   skills: string[]
   categorized_skills?: Record<string, 'strong' | 'normal' | 'beginner'>
-  work_auth: string[]
+  work_permits: string[]
   photo: string | null
 
   // structured CV
@@ -153,6 +161,8 @@ export interface EnrichedProfile {
   timeline: TimelineEntry[]
   /** Unified education: CV schools + LinkedIn-only schools (deduped) */
   educationTimeline: TimelineEntry[]
+  /** INSEAD club leadership positions (from the Junior Leadership Teams list) */
+  clubRoles: ClubRole[]
 
   // LinkedIn
   li_headline: string

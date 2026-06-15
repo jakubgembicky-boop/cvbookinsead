@@ -27,9 +27,8 @@ function lastRefresh(): string | null {
   }
 }
 
-function normalizeNationality(raw: string): string[] {
+function normalizeNationalities(raw: string[]): string[] {
   return raw
-    .split(/[,/;]/)
     .map((s) => s.trim())
     .filter(
       (s) =>
@@ -70,8 +69,8 @@ export default async function StatsPage() {
   // Nationalities
   const natMap: Record<string, number> = {}
   for (const p of profiles) {
-    if (!p.nationality) continue
-    for (const nat of normalizeNationality(p.nationality)) {
+    if (!p.nationalities?.length) continue
+    for (const nat of normalizeNationalities(p.nationalities)) {
       if (nat) natMap[nat] = (natMap[nat] ?? 0) + 1
     }
   }

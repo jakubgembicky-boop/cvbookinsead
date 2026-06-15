@@ -42,7 +42,7 @@ export function ProfileModal({
   }, [onClose])
 
   const photo = cv.photo || cv.li_photo_url
-  const meta = [cv.emails?.[0], cv.nationality].filter(Boolean).join(' · ')
+  const meta = [cv.emails?.[0], cv.nationalities?.length ? cv.nationalities.join(', ') : null].filter(Boolean).join(' · ')
 
   // Unified job timeline (CV ⊕ LinkedIn-only jobs), built server-side
   const timeline: TimelineEntry[] = cv.timeline?.length
@@ -175,7 +175,7 @@ export function ProfileModal({
           <PhotoAvatar src={photo} name={cv.name} size={64} ring="ring-2 ring-white/30" />
           <div className="flex-1 min-w-0">
             <h2 className="text-lg font-bold leading-tight">
-              {nationalityToFlag(cv.nationality || null)} {cv.name}
+              {cv.nationalities?.[0] && nationalityToFlag(cv.nationalities[0])} {cv.name}
             </h2>
             {meta && <p className="text-xs text-white/70 mt-1 truncate">{meta}</p>}
           </div>
@@ -285,6 +285,22 @@ export function ProfileModal({
             </div>
           )}
 
+          {/* INSEAD club leadership */}
+          {cv.clubRoles?.length > 0 && (
+            <Section title="INSEAD Club Leadership">
+              <div className="flex flex-col gap-2">
+                {cv.clubRoles.map((cr, i) => (
+                  <div key={i} className="flex items-center gap-2 text-sm">
+                    <span className="inline-flex items-center rounded-full bg-[#E4002B]/10 px-2.5 py-0.5 text-xs font-semibold text-[#E4002B]">
+                      {cr.club}
+                    </span>
+                    <span className="text-gray-600">{cr.role}</span>
+                  </div>
+                ))}
+              </div>
+            </Section>
+          )}
+
           {/* Education / Experience / Extra-curricular (each a single merged list) */}
           {education.length > 0 && <Section title="Education">{renderEntries(education)}</Section>}
           {timeline.length > 0 && (
@@ -299,7 +315,7 @@ export function ProfileModal({
           )}
 
           {/* Additional Information */}
-          {(langDisplay || cv.nationality || cv.work_auth?.length) && (
+          {(langDisplay || cv.nationalities?.length || cv.work_permits?.length) && (
             <Section title="Additional Information">
               <div className="space-y-1.5 text-xs text-gray-700">
                 {langDisplay && (
@@ -307,16 +323,15 @@ export function ProfileModal({
                     <strong>Languages:</strong> <Highlight text={langDisplay} terms={terms} />
                   </div>
                 )}
-                {cv.nationality && (
-                  <div>
-                    <strong>Nationality:</strong> <Highlight text={cv.nationality} terms={terms} />
-                  </div>
+                {cv.nationalities?.length > 0 && (
+                  <p>
+                    <strong>Nationalities:</strong> <Highlight text={cv.nationalities.join(', ')} terms={terms} />
+                  </p>
                 )}
-                {cv.work_auth?.length > 0 && (
-                  <div>
-                    <strong>Work Authorization:</strong>{' '}
-                    <Highlight text={cv.work_auth.join(', ')} terms={terms} />
-                  </div>
+                {cv.work_permits?.length > 0 && (
+                  <p>
+                    <strong>Work Permits:</strong> <Highlight text={cv.work_permits.join(', ')} terms={terms} />
+                  </p>
                 )}
               </div>
             </Section>

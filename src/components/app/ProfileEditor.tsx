@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Card } from '@/components/ui/Card'
 import { Avatar } from '@/components/ui/Avatar'
+import { TagInput } from '@/components/ui/TagInput'
 import { useToast } from '@/components/ui/Toast'
 import { Camera, Plus, Trash2, GripVertical } from 'lucide-react'
 import type { EnrichedProfile, CvEntry, ProfileOverrides } from '@/types'
@@ -180,7 +181,8 @@ export function ProfileEditor({ initial }: { initial: EnrichedProfile }) {
 
   // Identity
   const [name, setName] = useState(initial.name)
-  const [nationality, setNationality] = useState(initial.nationality)
+  const [nationalities, setNationalities] = useState<string[]>(initial.nationalities)
+  const [workPermits, setWorkPermits] = useState<string[]>(initial.work_permits)
   const [photo, setPhoto] = useState<string | null>(initial.photo)
   const [photoFile, setPhotoFile] = useState<File | null>(null)
   const [photoPreview, setPhotoPreview] = useState<string | null>(initial.photo)
@@ -232,7 +234,8 @@ export function ProfileEditor({ initial }: { initial: EnrichedProfile }) {
 
     const payload: ProfileOverrides = {
       name: name.trim(),
-      nationality: nationality.trim(),
+      nationalities,
+      work_permits: workPermits,
       photo: photoUrl,
       li_headline: headline.trim(),
       li_about: about.trim(),
@@ -288,10 +291,19 @@ export function ProfileEditor({ initial }: { initial: EnrichedProfile }) {
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
           <Input label="Full name" value={name} onChange={(e) => setName(e.target.value)} />
-          <Input
-            label="Nationality"
-            value={nationality}
-            onChange={(e) => setNationality(e.target.value)}
+        </div>
+        <div className="space-y-4 mt-4">
+          <TagInput
+            label="Nationalities"
+            value={nationalities}
+            onChange={setNationalities}
+            placeholder="e.g. Canadian, British"
+          />
+          <TagInput
+            label="Work Permits"
+            value={workPermits}
+            onChange={setWorkPermits}
+            placeholder="e.g. EU, UAE"
           />
         </div>
       </Card>

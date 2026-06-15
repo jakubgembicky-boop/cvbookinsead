@@ -6,6 +6,7 @@ import { createClient } from '@/lib/supabase/client'
 import { Button } from '@/components/ui/Button'
 import { Input } from '@/components/ui/Input'
 import { Avatar } from '@/components/ui/Avatar'
+import { TagInput } from '@/components/ui/TagInput'
 import { useToast } from '@/components/ui/Toast'
 import { Camera, Plus, Trash2, ChevronRight, ChevronLeft } from 'lucide-react'
 import type { Profile } from '@/types'
@@ -40,7 +41,8 @@ export default function OnboardingPage() {
   // Step 1 fields
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
-  const [nationality, setNationality] = useState('')
+  const [nationalities, setNationalities] = useState<string[]>([])
+  const [workPermits, setWorkPermits] = useState<string[]>([])
   const [photoPreview, setPhotoPreview] = useState<string | null>(null)
   const [photoFile, setPhotoFile] = useState<File | null>(null)
 
@@ -73,7 +75,8 @@ export default function OnboardingPage() {
         setProfile(prof)
         setFirstName(prof.first_name ?? '')
         setLastName(prof.last_name ?? '')
-        setNationality(prof.nationality ?? '')
+        setNationalities(prof.nationalities ?? [])
+        setWorkPermits(prof.work_permits ?? [])
         setPhone(prof.phone ?? '')
         setPersonalEmail(prof.personal_email ?? '')
         setPhotoPreview(prof.photo_url ?? null)
@@ -116,7 +119,8 @@ export default function OnboardingPage() {
       updates = {
         first_name: firstName.trim(),
         last_name: lastName.trim(),
-        nationality: nationality.trim(),
+        nationalities,
+        work_permits: workPermits,
         photo_url: photoUrl,
         onboarding_step: 1,
       }
@@ -243,12 +247,20 @@ export default function OnboardingPage() {
             />
           </div>
 
-          <Input
-            label="Nationality"
-            value={nationality}
-            onChange={(e) => setNationality(e.target.value)}
-            placeholder="e.g. French, British"
-          />
+          <div className="space-y-4">
+            <TagInput
+              label="Nationalities"
+              value={nationalities}
+              onChange={setNationalities}
+              placeholder="Type and press Enter (e.g. Canadian)"
+            />
+            <TagInput
+              label="Work Permits"
+              value={workPermits}
+              onChange={setWorkPermits}
+              placeholder="Type and press Enter (e.g. EU, UAE)"
+            />
+          </div>
 
           <Button
             className="w-full"

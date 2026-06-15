@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useMemo, useCallback } from 'react'
-import { Search, X, ChevronDown, Star } from 'lucide-react'
+import { Search, X, ChevronDown, Star, Award } from 'lucide-react'
 import { toggleContactSelection, addContactSelections } from '@/app/(app)/contacts/actions'
 import type { EnrichedProfile } from '@/types'
 import {
@@ -188,11 +188,31 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
     })
   }, [])
 
+  // Club leadership filter ('' = off, '__any__' = any leader, else a club name)
+  const [clubFilter, setClubFilter] = useState<string>('')
+
+  const clubOptions = useMemo(() => {
+    const s = new Set<string>()
+    for (const p of profiles) for (const r of p.clubRoles ?? []) s.add(r.club)
+    return [...s].sort()
+  }, [profiles])
+
   // Pre-build the search index once per profile set
   const indexed = useMemo(
     () => profiles.map((cv) => ({ cv, idx: buildSearchIndex(cv) })),
     [profiles]
   )
+
+  // Apply the club filter up front; search + default grid both operate on this
+  const visible = useMemo(() => {
+    if (!clubFilter) return indexed
+    return indexed.filter(({ cv }) => {
+      const roles = cv.clubRoles ?? []
+      return clubFilter === '__any__'
+        ? roles.length > 0
+        : roles.some((r) => r.club === clubFilter)
+    })
+  }, [indexed, clubFilter])
 
   const tokens = useMemo(() => parseQuery(query), [query])
   const terms = useMemo(() => highlightTerms(tokens), [tokens])
@@ -203,7 +223,7 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
     const full: ScoredEntry[] = []
     const rest: ScoredEntry[] = []
     if (tokens.length === 0) return { full, rest }
-    for (const entry of indexed) {
+    for (const entry of visible) {
       const strength = scoreStrength(entry, matchers)
       const allMatch = matchesAll(entry, tokens, scope)
       // For multi-token queries require at least "good" tier — weak means one
@@ -216,7 +236,7 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
     full.sort((a, b) => b.strength.score - a.strength.score)
     rest.sort((a, b) => b.strength.score - a.strength.score)
     return { full, rest }
-  }, [indexed, tokens, scope, matchers])
+  }, [visible, tokens, scope, matchers])
 
   // Top 3 pinned. Prefer full matches; if none, surface the closest partials.
   const pinned = useMemo(() => (full.length > 0 ? full : rest).slice(0, 3), [full, rest])
@@ -270,7 +290,9 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
 
   // Add every currently shown full/pinned match to the contact book
   async function addAllShown() {
-    const shown = hasQuery ? [...pinned, ...gridFull].map((s) => s.entry.cv) : profiles
+    const shown = hasQuery
+      ? [...pinned, ...gridFull].map((s) => s.entry.cv)
+      : visible.map((e) => e.cv)
     const emails = shown.map((cv) => cv.inseadEmail.toLowerCase()).filter(Boolean)
     if (emails.length === 0) return
     setBulkAdding(true)
@@ -352,6 +374,36 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
         ))}
       </div>
 
+      {/* Club leadership filter */}
+      <div className="flex flex-wrap items-center gap-1.5">
+        <span className="text-xs font-medium text-gray-400 mr-1">Filter by:</span>
+        <button
+          onClick={() => setClubFilter(clubFilter ? '' : '__any__')}
+          className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+            clubFilter
+              ? 'bg-[#E4002B] text-white'
+              : 'bg-white border border-gray-200 text-gray-600 hover:border-[#E4002B]/40 hover:text-[#E4002B]'
+          }`}
+        >
+          <Award className="h-3 w-3" />
+          Club leaders
+          {clubFilter && <X className="h-3 w-3" onClick={(e) => { e.stopPropagation(); setClubFilter('') }} />}
+        </button>
+        {clubFilter && clubOptions.map((c) => (
+          <button
+            key={c}
+            onClick={() => setClubFilter(clubFilter === c ? '__any__' : c)}
+            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+              clubFilter === c
+                ? 'bg-[#E4002B]/20 text-[#E4002B] border border-[#E4002B]/30'
+                : 'bg-white border border-gray-200 text-gray-500 hover:border-[#E4002B]/30 hover:text-[#E4002B]'
+            }`}
+          >
+            {c}
+          </button>
+        ))}
+      </div>
+
       {/* Legends row */}
       <div className="flex flex-col gap-1.5">
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[10px] text-gray-400">
@@ -389,10 +441,10 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
       <div className="flex items-center justify-between gap-2">
         <p className="text-sm text-gray-500">
           {!hasQuery
-            ? `${profiles.length} members`
+            ? `${visible.length} ${clubFilter ? 'club leaders' : 'members'}`
             : full.length === 0
               ? `No exact matches`
-              : `${full.length} of ${profiles.length} — full match`}
+              : `${full.length} of ${visible.length} — full match`}
           {hasQuery && partialTotal > 0 && (
             <span className="text-gray-400"> · {partialTotal} partial</span>
           )}
@@ -409,10 +461,10 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
         )}
       </div>
 
-      {/* No-query: full directory */}
+      {/* No-query: full directory (club filter applied) */}
       {!hasQuery ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {indexed.map((entry, i) => (
+          {visible.map((entry, i) => (
             <ProfileCard
               key={`${entry.cv.profileId || entry.cv.inseadEmail || entry.cv.name || 'cv'}-${i}`}
               cv={entry.cv}

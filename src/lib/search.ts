@@ -822,10 +822,10 @@ export function buildSearchIndex(cv: EnrichedProfile): SearchIndex {
   parts.headline = (cv.li_headline || '').toLowerCase()
   parts.about = (cv.li_about || '').toLowerCase()
 
-  const nat = cv.nationality || ''
-  if (nat) {
-    parts.nationality.push(nat)
-    parts.location.push(nat)
+  const nats = cv.nationalities || []
+  if (nats.length > 0) {
+    parts.nationality.push(...nats)
+    parts.location.push(...nats)
   } else {
     for (const p of parseAllLanguages(cv.languages)) {
       if (p.cefr === 'C2') {
@@ -836,6 +836,13 @@ export function buildSearchIndex(cv: EnrichedProfile): SearchIndex {
         }
       }
     }
+  }
+
+  // INSEAD club leadership — searchable by club name or role title
+  // Also push to company so "Companies & Roles" scope finds them
+  for (const cr of cv.clubRoles || []) {
+    if (cr.club) { parts.taxonomy.push(cr.club.toLowerCase()); parts.company.push(cr.club.toLowerCase()) }
+    if (cr.role) { parts.taxonomy.push(cr.role.toLowerCase()); parts.company.push(cr.role.toLowerCase()) }
   }
 
   parts.all = [

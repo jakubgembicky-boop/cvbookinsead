@@ -45,7 +45,8 @@ export async function saveOverrides(
     synced.first_name = first
     synced.last_name = last
   }
-  if (payload.nationality !== undefined) synced.nationality = payload.nationality || null
+  if (payload.nationalities !== undefined) synced.nationalities = payload.nationalities
+  if (payload.work_permits !== undefined) synced.work_permits = payload.work_permits
   if (Array.isArray(payload.languages)) synced.languages = payload.languages
   if (Array.isArray(payload.phones)) synced.phone = payload.phones[0] ?? null
   if (payload.personal_email !== undefined) synced.personal_email = payload.personal_email || null

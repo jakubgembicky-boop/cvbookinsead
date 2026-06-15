@@ -46,6 +46,7 @@ interface CvProfile {
   languages: string[]
   skills: string[]
   nationality: string
+  work_auth?: string[]
   photo?: string | null
   page: number
 }
@@ -154,7 +155,8 @@ async function main() {
       linkedin_url: cv.linkedin || null,
       photo_url: liData?.li_photo_url ?? cv.photo ?? null,
       languages: cv.languages,
-      nationality: cv.nationality || null,
+      nationalities: cv.nationality ? cv.nationality.split(/[;,]/).map(s => s.trim()).filter(Boolean) : [],
+      work_permits: cv.work_auth ?? [],
       // LinkedIn enrichment
       li_headline: liData?.li_headline ?? null,
       li_location: liData?.li_location ?? null,

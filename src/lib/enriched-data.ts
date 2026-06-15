@@ -392,17 +392,6 @@ function mergeOne(
   }
 }
 
-/**
- * Returns every classmate (from the CV book) as a merged EnrichedProfile,
- * with LinkedIn enrichment and any Supabase profile edits overlaid.
- */
-export const getCachedEnrichedProfiles = unstable_cache(
-  async () => {
-    return getEnrichedProfiles()
-  },
-  ['enriched-profiles-v2'],
-  { revalidate: 3600 } // 1 hour
-)
 
 export function getEnrichedProfiles(
   supabaseProfiles: Profile[],

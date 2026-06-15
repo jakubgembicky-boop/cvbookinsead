@@ -41,26 +41,12 @@ const CONFIDENCE_CFG: Record<Confidence, { label: string; cls: string; note: str
   },
 }
 
-// Industry options grouped by parent bucket, sub-industries selectable too
-const INDUSTRY_OPTIONS: { label: string; value: string; indent: boolean }[] = (() => {
-  const out: { label: string; value: string; indent: boolean }[] = []
-  
-  // Sort parent industries alphabetically
-  const sortedParents = [...INDUSTRY_PARENTS].sort((a, b) => a.localeCompare(b))
-  
-  for (const parent of sortedParents) {
-    out.push({ label: parent, value: parent, indent: false })
-    
-    // Sort sub-industries alphabetically
-    const children = INDUSTRY_TREE.filter((n) => n.parent === parent && n.label !== parent)
-      .sort((a, b) => a.label.localeCompare(b.label))
-      
-    for (const node of children) {
-      out.push({ label: `  ${node.label}`, value: node.label, indent: true })
-    }
-  }
-  return out
-})()
+// Industry options are now generated dynamically inside the component
+// to filter out 0-count entries.
+const ALL_INDUSTRIES_FLAT = [
+  ...INDUSTRY_PARENTS,
+  ...INDUSTRY_TREE.filter(n => n.label !== n.parent).map(n => n.label)
+]
 
 const FUNCTION_LABELS = FUNCTIONS.map((c) => c.label).sort((a, b) => a.localeCompare(b))
 
@@ -154,11 +140,43 @@ export function SwitchClient({
     [self, index]
   )
 
-  const countries = useMemo(() => {
-    const set = new Set<string>()
-    for (const e of index) for (const s of e.steps) if (s.country) set.add(s.country)
-    return [...set].sort()
+  const { countries, validIndustries, validFunctions } = useMemo(() => {
+    const cSet = new Set<string>()
+    const iSet = new Set<string>()
+    const fSet = new Set<string>()
+
+    for (const e of index) {
+      if (e.steps.length > 0) {
+        const fromStep = e.steps[0]
+        if (fromStep.country) cSet.add(fromStep.country)
+        if (fromStep.primaryIndustry) iSet.add(fromStep.primaryIndustry)
+        if (fromStep.primaryParent) iSet.add(fromStep.primaryParent)
+        if (fromStep.primaryFunction) fSet.add(fromStep.primaryFunction)
+        // Ensure "To" targets are also allowed to be selected even if 0-count on "From" 
+        // Wait, user explicitly requested: "check if there are any industries, functions with 0 people assigned (on the "From" side) and delete them".
+        // So we strictly build this based on the "From" side.
+      }
+    }
+    return {
+      countries: [...cSet].sort(),
+      validIndustries: iSet,
+      validFunctions: fSet
+    }
   }, [index])
+
+  const dynamicIndustryOptions = useMemo(() => {
+    return ALL_INDUSTRIES_FLAT
+      .filter(ind => validIndustries.has(ind))
+      .sort((a, b) => a.localeCompare(b))
+      .map(ind => ({ label: ind, value: ind }))
+  }, [validIndustries])
+
+  const dynamicFunctionOptions = useMemo(() => {
+    return FUNCTION_LABELS
+      .filter(fn => validFunctions.has(fn))
+      .sort((a, b) => a.localeCompare(b))
+      .map(fn => ({ label: fn, value: fn }))
+  }, [validFunctions])
 
   const [query, setQuery] = useState<SwitchQuery>(() => {
     const cur = selfSteps[0]
@@ -243,8 +261,8 @@ export function SwitchClient({
           </p>
           <div className="grid gap-3">
             <CountrySelect label="Country" value={query.fromCountry} countries={countries} onChange={(v) => set({ fromCountry: v })} />
-            <Select label="Industry" value={query.fromIndustry} options={INDUSTRY_OPTIONS} onChange={(v) => set({ fromIndustry: v })} />
-            <Select label="Function" value={query.fromFunction} options={FUNCTION_LABELS.map((l) => ({ label: l, value: l }))} onChange={(v) => set({ fromFunction: v })} />
+            <Select label="Industry" value={query.fromIndustry} options={dynamicIndustryOptions} onChange={(v) => set({ fromIndustry: v })} />
+            <Select label="Function" value={query.fromFunction} options={dynamicFunctionOptions} onChange={(v) => set({ fromFunction: v })} />
           </div>
         </div>
 
@@ -258,8 +276,8 @@ export function SwitchClient({
           </p>
           <div className="grid gap-3">
             <CountrySelect label="Country" value={query.toCountry} countries={countries} onChange={(v) => set({ toCountry: v })} />
-            <Select label="Industry" value={query.toIndustry} options={INDUSTRY_OPTIONS} onChange={(v) => set({ toIndustry: v })} />
-            <Select label="Function" value={query.toFunction} options={FUNCTION_LABELS.map((l) => ({ label: l, value: l }))} onChange={(v) => set({ toFunction: v })} />
+            <Select label="Industry" value={query.toIndustry} options={dynamicIndustryOptions} onChange={(v) => set({ toIndustry: v })} />
+            <Select label="Function" value={query.toFunction} options={dynamicFunctionOptions} onChange={(v) => set({ toFunction: v })} />
           </div>
         </div>
       </div>

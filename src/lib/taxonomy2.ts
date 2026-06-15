@@ -29,6 +29,7 @@ export const INDUSTRY_TREE: IndustryNode[] = [
   { label: 'Financial & Transaction Advisory', parent: 'Consulting', keywords: ['transaction advisory', 'transaction services', 'financial advisory', 'commercial due diligence', 'restructuring advisory', 'valuation advisory', 'deal advisory'] },
   { label: 'Technology & Digital Consulting', parent: 'Consulting', keywords: ['technology consulting', 'it consulting', 'digital consulting', 'systems integration'] },
   { label: 'Economic & Public Sector Consulting', parent: 'Consulting', keywords: ['economic consulting', 'public sector consulting', 'policy advisory', 'government advisory'] },
+  
   // Finance
   { label: 'Investment Banking', parent: 'Finance', keywords: ['investment banking', 'm&a advisory', 'capital markets', 'ecm', 'dcm', 'leveraged finance'] },
   { label: 'Private Equity', parent: 'Finance', keywords: ['private equity', 'buyout', 'lbo', 'growth equity'] },
@@ -38,27 +39,25 @@ export const INDUSTRY_TREE: IndustryNode[] = [
   { label: 'Retail & Commercial Banking', parent: 'Finance', keywords: ['retail banking', 'commercial banking', 'corporate banking', 'credit analysis', 'lending'] },
   { label: 'Insurance', parent: 'Finance', keywords: ['insurance', 'reinsurance', 'actuarial', 'underwriting'] },
   { label: 'Fintech & Payments', parent: 'Finance', keywords: ['fintech', 'payments', 'digital banking', 'crypto', 'blockchain'] },
-  // Technology
-  { label: 'Software & SaaS', parent: 'Technology', keywords: ['software', 'saas', 'enterprise software', 'cloud computing'] },
-  { label: 'Internet & Consumer Tech', parent: 'Technology', keywords: ['marketplace', 'e-commerce platform', 'consumer app', 'social media', 'ride-hailing', 'delivery platform'] },
-  { label: 'Semiconductors & Hardware', parent: 'Technology', keywords: ['semiconductor', 'chip', 'hardware', 'electronics manufacturing'] },
-  { label: 'Cybersecurity', parent: 'Technology', keywords: ['cybersecurity', 'information security'] },
-  { label: 'Telecom', parent: 'Technology', keywords: ['telecom', 'telecommunications', 'mobile network', 'broadband'] },
-  { label: 'IT Services & Data', parent: 'Technology', keywords: ['it services', 'data analytics services', 'business intelligence', 'outsourcing'] },
-  // Flat industries
+  
+  // Technology & Telecom
+  { label: 'Software & SaaS', parent: 'Technology & Telecom', keywords: ['software', 'saas', 'enterprise software', 'cloud computing'] },
+  { label: 'Internet & Consumer Tech', parent: 'Technology & Telecom', keywords: ['marketplace', 'e-commerce platform', 'consumer app', 'social media', 'ride-hailing', 'delivery platform'] },
+  { label: 'Semiconductors & Hardware', parent: 'Technology & Telecom', keywords: ['semiconductor', 'chip', 'hardware', 'electronics manufacturing'] },
+  { label: 'Cybersecurity', parent: 'Technology & Telecom', keywords: ['cybersecurity', 'information security'] },
+  { label: 'Telecom', parent: 'Technology & Telecom', keywords: ['telecom', 'telecommunications', 'mobile network', 'broadband'] },
+  { label: 'IT Services & Data', parent: 'Technology & Telecom', keywords: ['it services', 'data analytics services', 'business intelligence', 'outsourcing'] },
+  
+  // Flat / Consolidated Industries
   { label: 'Healthcare & Pharma', parent: 'Healthcare & Pharma', keywords: ['pharmaceutical', 'biotech', 'medtech', 'hospital', 'clinical', 'healthcare', 'life sciences'] },
-  { label: 'Energy & Utilities', parent: 'Energy & Utilities', keywords: ['oil and gas', 'renewables', 'solar', 'wind energy', 'power generation', 'utilities', 'energy transition', 'lng', 'petroleum'] },
-  { label: 'Consumer Goods & Retail', parent: 'Consumer Goods & Retail', keywords: ['fmcg', 'cpg', 'consumer goods', 'retail', 'brand management', 'luxury', 'fashion', 'food and beverage'] },
-  { label: 'Manufacturing & Industrials', parent: 'Manufacturing & Industrials', keywords: ['manufacturing', 'industrial', 'automotive', 'aerospace', 'chemicals', 'machinery', 'construction materials'] },
+  { label: 'Energy, Utilities & Sustainability', parent: 'Energy, Utilities & Sustainability', keywords: ['oil and gas', 'renewables', 'solar', 'wind energy', 'power generation', 'utilities', 'energy transition', 'lng', 'petroleum', 'sustainability', 'esg', 'climate'] },
+  { label: 'Consumer Goods, Retail & Hospitality', parent: 'Consumer Goods, Retail & Hospitality', keywords: ['fmcg', 'cpg', 'consumer goods', 'retail', 'brand management', 'luxury', 'fashion', 'food and beverage', 'hotel', 'hospitality', 'tourism', 'restaurant', 'travel'] },
+  { label: 'Manufacturing, Industrials & Agriculture', parent: 'Manufacturing, Industrials & Agriculture', keywords: ['manufacturing', 'industrial', 'automotive', 'aerospace', 'chemicals', 'machinery', 'construction materials', 'agriculture', 'agtech', 'farming', 'agribusiness', 'food production'] },
   { label: 'Real Estate & Infrastructure', parent: 'Real Estate & Infrastructure', keywords: ['real estate', 'property development', 'infrastructure', 'construction', 'reit'] },
   { label: 'Transportation & Logistics', parent: 'Transportation & Logistics', keywords: ['logistics', 'shipping', 'airline', 'aviation', 'freight', 'supply chain services', 'rail'] },
   { label: 'Media & Entertainment', parent: 'Media & Entertainment', keywords: ['media', 'entertainment', 'publishing', 'gaming', 'film', 'music', 'sports', 'advertising'] },
-  { label: 'Hospitality & Travel', parent: 'Hospitality & Travel', keywords: ['hotel', 'hospitality', 'tourism', 'restaurant', 'travel'] },
-  { label: 'Government & Public Sector', parent: 'Government & Public Sector', keywords: ['government', 'ministry', 'public administration', 'regulator', 'central bank', 'municipality'] },
-  { label: 'NGO & Development', parent: 'NGO & Development', keywords: ['ngo', 'non-profit', 'development finance', 'humanitarian', 'united nations', 'world bank', 'social impact'] },
-  { label: 'Education & Research', parent: 'Education & Research', keywords: ['university', 'education', 'edtech', 'research institute', 'academia'] },
-  { label: 'Legal Services', parent: 'Legal Services', keywords: ['law firm', 'legal services', 'attorneys', 'litigation', 'arbitration'] },
-  { label: 'Agriculture & Food Production', parent: 'Agriculture & Food Production', keywords: ['agriculture', 'agtech', 'farming', 'agribusiness', 'food production'] },
+  { label: 'Public Sector, NGO & Education', parent: 'Public Sector, NGO & Education', keywords: ['government', 'ministry', 'public administration', 'regulator', 'central bank', 'municipality', 'ngo', 'non-profit', 'development finance', 'humanitarian', 'united nations', 'world bank', 'social impact', 'university', 'education', 'edtech', 'research institute', 'academia'] },
+  { label: 'Professional & Legal Services', parent: 'Professional & Legal Services', keywords: ['law firm', 'legal services', 'attorneys', 'litigation', 'arbitration', 'accounting firm', 'audit services'] },
 ]
 
 export const INDUSTRY_PARENTS = [...new Set(INDUSTRY_TREE.map((n) => n.parent))]
@@ -132,13 +131,13 @@ const NAME_PATTERNS: [RegExp, string][] = [
   [/\bbank(ing)?\b/i, 'Retail & Commercial Banking'],
   [/asset management|wealth/i, 'Asset & Wealth Management'],
   [/insurance|assurance|seguros/i, 'Insurance'],
-  [/\b(law|legal|attorneys|abogados|llp)\b/i, 'Legal Services'],
-  [/universit|school|college|institute of technology|polytechnic/i, 'Education & Research'],
-  [/ministry|government|authority|agency|commission|municipal/i, 'Government & Public Sector'],
-  [/foundation|charity|ngo|non-?profit|unicef|undp/i, 'NGO & Development'],
-  [/hotel|resort|hospitality/i, 'Hospitality & Travel'],
+  [/\b(law|legal|attorneys|abogados|llp)\b/i, 'Professional & Legal Services'],
+  [/universit|school|college|institute of technology|polytechnic/i, 'Public Sector, NGO & Education'],
+  [/ministry|government|authority|agency|commission|municipal/i, 'Public Sector, NGO & Education'],
+  [/foundation|charity|ngo|non-?profit|unicef|undp/i, 'Public Sector, NGO & Education'],
+  [/hotel|resort|hospitality/i, 'Consumer Goods, Retail & Hospitality'],
   [/pharma|biotech|health|medical|hospital|clinic/i, 'Healthcare & Pharma'],
-  [/energy|petroleum|oil|solar|renewab|power/i, 'Energy & Utilities'],
+  [/energy|petroleum|oil|solar|renewab|power/i, 'Energy, Utilities & Sustainability'],
   [/logistics|shipping|airlines?|cargo|freight/i, 'Transportation & Logistics'],
   [/real estate|properties|realty/i, 'Real Estate & Infrastructure'],
   [/media|studios?|entertainment|publishing/i, 'Media & Entertainment'],

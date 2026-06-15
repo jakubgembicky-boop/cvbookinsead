@@ -95,54 +95,35 @@ export const INDUSTRIES: TaxonomyCategory[] = [
     ],
   },
   {
-    label: 'Investment Banking',
+    label: 'Finance',
     keywords: [
       'investment banking', 'investment bank', 'goldman sachs', 'morgan stanley',
       'jp morgan', 'jpmorgan', 'merrill lynch', 'barclays', 'credit suisse',
       'deutsche bank', 'hsbc', 'lazard', 'rothschild', 'nomura', 'bulge bracket',
       'leveraged finance', 'lev fin', 'debt capital markets', 'equity capital markets',
-    ],
-  },
-  {
-    label: 'Private Equity',
-    keywords: [
       'private equity', 'buyout', 'lbo', 'leveraged buyout', 'growth equity',
       'kkr', 'blackstone', 'carlyle', 'tpg', 'advent international', 'warburg pincus',
       'apax', 'bridgepoint', 'permira', 'general partner',
-    ],
-  },
-  {
-    label: 'Venture Capital',
-    keywords: [
       'venture capital', 'early stage', 'seed stage', 'series a', 'series b',
       'accelerator', 'incubator', 'angel investing', 'andreessen horowitz',
       'sequoia', 'accel', 'tiger global', 'y combinator',
-    ],
-  },
-  {
-    label: 'Asset & Wealth Management',
-    keywords: [
       'asset management', 'wealth management', 'fund management', 'portfolio management',
       'hedge fund', 'mutual fund', 'investment management', 'family office',
       'endowment', 'pension fund', 'blackrock', 'vanguard', 'fidelity',
       'schroders', 'amundi', 'aum', 'private banking',
-    ],
-  },
-  {
-    label: 'Financial Services',
-    keywords: [
       'financial services', 'banking', 'fintech', 'insurance', 'reinsurance',
       'actuarial', 'payments', 'capital markets', 'treasury', 'structured finance',
       'securitization', 'trade finance',
     ],
   },
   {
-    label: 'Technology',
+    label: 'Technology & Telecom',
     keywords: [
       'software', 'saas', 'technology company', 'tech company', 'digital platform',
       'cloud computing', 'google', 'amazon web', 'microsoft', 'meta ', 'apple ',
       'netflix', 'spotify', 'uber', 'airbnb', 'palantir', 'salesforce', 'oracle ',
-      'sap ', 'semiconductor', 'cybersecurity',
+      'sap ', 'semiconductor', 'cybersecurity', 'telecom', 'telecommunications', 
+      'wireless', 'mobile network', 'telco', 'broadband', 'connectivity solutions',
     ],
   },
   {
@@ -155,30 +136,30 @@ export const INDUSTRIES: TaxonomyCategory[] = [
     ],
   },
   {
-    label: 'Energy',
+    label: 'Energy, Utilities & Sustainability',
     keywords: [
       'oil and gas', 'oil & gas', 'petroleum', 'lng', 'upstream', 'downstream',
       'midstream', 'renewables', 'solar energy', 'wind energy', 'clean energy',
       'power generation', 'utilities', 'electricity', 'bp ', 'shell ',
-      'exxon', 'chevron', 'totalenergies', 'equinor', 'eni ',
+      'exxon', 'chevron', 'totalenergies', 'equinor', 'eni ', 'sustainability', 'esg', 'climate',
     ],
   },
   {
-    label: 'Consumer & Retail',
+    label: 'Consumer Goods, Retail & Hospitality',
     keywords: [
       'consumer goods', 'retail', 'fmcg', 'cpg', 'brand management', 'ecommerce',
       'e-commerce', 'fashion', 'luxury goods', 'food & beverage', 'food and beverage',
       'procter & gamble', 'p&g', 'unilever', 'nestle', 'loreal', 'l\'oreal', 'lvmh',
-      'nike ', 'zalando',
+      'nike ', 'zalando', 'hotel', 'hospitality', 'tourism', 'restaurant', 'travel',
     ],
   },
   {
-    label: 'Manufacturing & Industrials',
+    label: 'Manufacturing, Industrials & Agriculture',
     keywords: [
       'manufacturing', 'industrial', 'production operations', 'automotive',
       'aerospace', 'defense', 'chemicals', 'materials science',
       'siemens', 'general electric', 'honeywell', 'bosch ', 'bmw ', 'volkswagen',
-      'airbus', 'boeing', 'basf',
+      'airbus', 'boeing', 'basf', 'agriculture', 'agtech', 'farming', 'agribusiness', 'food production',
     ],
   },
   {
@@ -189,6 +170,12 @@ export const INDUSTRIES: TaxonomyCategory[] = [
     ],
   },
   {
+    label: 'Transportation & Logistics',
+    keywords: [
+      'logistics', 'shipping', 'airline', 'aviation', 'freight', 'supply chain services', 'rail',
+    ],
+  },
+  {
     label: 'Media & Entertainment',
     keywords: [
       'media', 'entertainment', 'publishing', 'broadcast', 'film ', 'music ',
@@ -196,20 +183,25 @@ export const INDUSTRIES: TaxonomyCategory[] = [
     ],
   },
   {
-    label: 'Telecom',
-    keywords: [
-      'telecom', 'telecommunications', 'wireless', 'mobile network', 'telco',
-      'broadband', 'connectivity solutions',
-    ],
-  },
-  {
-    label: 'Government & NGO',
+    label: 'Public Sector, NGO & Education',
     keywords: [
       'government', 'public sector', 'ministry', 'regulatory', 'diplomacy',
       'ngo', 'non-profit', 'nonprofit', 'foundation', 'world bank', 'imf ',
       'united nations', 'undp', 'unicef', 'oecd', 'european commission',
       'civil service', 'social impact', 'international organization',
+      'university', 'education', 'edtech', 'research institute', 'academia',
     ],
+  },
+  {
+    label: 'Professional & Legal Services',
+    keywords: [
+      'law firm', 'legal services', 'attorneys', 'litigation', 'arbitration', 
+      'accounting firm', 'audit services', 'legal',
+    ],
+  },
+  {
+    label: 'Other',
+    keywords: [],
   },
 ]
 

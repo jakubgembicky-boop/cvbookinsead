@@ -9,11 +9,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  experimental: {
-    outputFileTracingIncludes: {
-      '/*': ['./data/**/*'],
-      '/api/**/*': ['./data/**/*'],
-    },
+  outputFileTracingIncludes: {
+    '/**': ['./data/**/*'],
   },
 };
 

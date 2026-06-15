@@ -497,6 +497,30 @@ let _cachedCohortAt = 0
  * Cached cohort profiles wrapper to prevent fetching all from Supabase on every route load.
  * Using a module-level variable to bypass Next.js 2MB unstable_cache limits.
  */
+/**
+ * Resolve the logged-in auth user to their canonical INSEAD email.
+ *
+ * Profiles are keyed by `insead_email`, and the auth `user.id` links to a CV
+ * ONLY through the `profiles` table (profiles.id is its own PK — NOT the auth
+ * id). So to mark "self" in the cohort we must look up the user's profile row
+ * and match by email. Returns a lowercased email, or null if unlinked.
+ */
+export async function getSelfInseadEmail(userId: string | null | undefined): Promise<string | null> {
+  if (!userId) return null
+  const { data } = await supabaseAdmin
+    .from('profiles')
+    .select('insead_email')
+    .eq('user_id', userId)
+    .single()
+  return data?.insead_email?.toLowerCase() ?? null
+}
+
+/** Stamp `isSelf` onto a cohort by matching the given (lowercased) INSEAD email. */
+export function markSelf(profiles: EnrichedProfile[], selfEmail: string | null): EnrichedProfile[] {
+  if (!selfEmail) return profiles
+  return profiles.map((p) => ({ ...p, isSelf: p.inseadEmail.toLowerCase() === selfEmail }))
+}
+
 export async function getCachedEnrichedProfiles(): Promise<EnrichedProfile[]> {
   const now = Date.now()
   if (_cachedCohort && now - _cachedCohortAt < 5 * 60 * 1000) {

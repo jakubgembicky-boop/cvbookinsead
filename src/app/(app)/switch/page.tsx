@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { getCachedEnrichedProfiles } from '@/lib/enriched-data'
+import { getCachedEnrichedProfiles, getSelfInseadEmail, markSelf } from '@/lib/enriched-data'
 import { SwitchClient } from '@/components/app/SwitchClient'
 import { buildStepsIndex } from '@/lib/switch-model'
 import fs from 'fs'
@@ -13,10 +13,8 @@ export default async function SwitchPage() {
     data: { user },
   } = await supabase.auth.getUser()
   const cached = await getCachedEnrichedProfiles()
-  const enriched = cached.map(p => ({
-    ...p,
-    isSelf: !!(user && p.profileId === user.id)
-  }))
+  const selfEmail = await getSelfInseadEmail(user?.id)
+  const enriched = markSelf(cached, selfEmail)
 
   let marketSkills = {}
   try {

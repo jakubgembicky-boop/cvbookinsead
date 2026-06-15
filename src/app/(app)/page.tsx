@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { getCachedEnrichedProfiles } from '@/lib/enriched-data'
+import { getCachedEnrichedProfiles, getSelfInseadEmail, markSelf } from '@/lib/enriched-data'
 import { DirectoryClient } from '@/components/app/DirectoryClient'
 
 export const dynamic = 'force-dynamic'
@@ -12,10 +12,8 @@ export default async function DirectoryPage() {
   } = await supabase.auth.getUser()
 
   const cached = await getCachedEnrichedProfiles()
-  const enriched = cached.map(p => ({
-    ...p,
-    isSelf: !!(user && p.profileId === user.id)
-  }))
+  const selfEmail = await getSelfInseadEmail(user?.id)
+  const enriched = markSelf(cached, selfEmail)
 
   const { data: selections } = user
     ? await supabase.from('contact_selections').select('contact_email').eq('user_id', user.id)

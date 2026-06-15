@@ -1,5 +1,5 @@
 import { createClient } from '@/lib/supabase/server'
-import { getCachedEnrichedProfiles } from '@/lib/enriched-data'
+import { getCachedEnrichedProfiles, getSelfInseadEmail, markSelf } from '@/lib/enriched-data'
 import { parseAllLanguages } from '@/lib/search'
 import {
   extractCareerSteps,
@@ -56,10 +56,8 @@ export default async function StatsPage() {
     data: { user },
   } = await supabase.auth.getUser()
   const cached = await getCachedEnrichedProfiles()
-  const profiles = cached.map(p => ({
-    ...p,
-    isSelf: !!(user && p.profileId === user.id)
-  }))
+  const selfEmail = await getSelfInseadEmail(user?.id)
+  const profiles = markSelf(cached, selfEmail)
 
   const liCount = profiles.filter((p) => p.li_enriched_at).length
 

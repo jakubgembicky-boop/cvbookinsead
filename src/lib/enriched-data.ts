@@ -13,6 +13,7 @@ import type {
   TimelineEntry,
 } from '@/types'
 import { classifyJob, parentOf, impliedSkills } from '@/lib/taxonomy2'
+import { calculateSkillProficiencies } from './skill-ranking'
 
 function resolveDataPath(file: string): string {
   const webPath = path.join(process.cwd(), 'data', file)
@@ -131,6 +132,20 @@ function loadCategorizedSkills(): Record<string, Record<string, 'strong' | 'norm
     }
   }
   return _categorizedSkills
+}
+
+let _rawCategorizedSkills: Record<string, Record<string, string[]>> | null = null
+function loadRawCategorizedSkills() {
+  if (!_rawCategorizedSkills) {
+    try {
+      _rawCategorizedSkills = JSON.parse(
+        fs.readFileSync(path.join(process.cwd(), 'data', 'skills_categorized.json'), 'utf-8')
+      )
+    } catch {
+      _rawCategorizedSkills = {}
+    }
+  }
+  return _rawCategorizedSkills!
 }
 
 function canonNationalities(raw: string | string[]): string[] {
@@ -380,10 +395,9 @@ function mergeOne(
         ...impliedSkills(timeline),
       ])
       
-  const catSkillsDict = loadCategorizedSkills()[fixKey(cv)]
-  const categorized_skills = catSkillsDict ?? {}
+  const rawCatDict = loadRawCategorizedSkills()[fixKey(cv)] ?? null
 
-  return {
+  const result: EnrichedProfile = {
     profileId: profile?.id ?? null,
     inseadEmail,
     isSelf: !!(profile && currentUserId && profile.user_id === currentUserId),
@@ -395,7 +409,7 @@ function mergeOne(
     nationalities: pick(ov.nationalities, profile?.nationalities, canonNationalities(cv.nationality ?? '')),
     languages: pick(ov.languages, profile?.languages?.length ? profile.languages : undefined, cv.languages ?? []),
     skills,
-    categorized_skills,
+    categorized_skills: {},
     work_permits: pick(ov.work_permits, profile?.work_permits, cv.work_auth ?? []),
     photo: photo || liPhoto,
 
@@ -419,6 +433,11 @@ function mergeOne(
     li_current_company: pick(ov.li_current_company, li?.li_current_company, ''),
     li_enriched_at: li?.scraped_at ?? '',
   }
+
+  // Dynamically calculate and overwrite categorized skills ranking
+  result.categorized_skills = calculateSkillProficiencies(result, rawCatDict)
+
+  return result
 }
 
 

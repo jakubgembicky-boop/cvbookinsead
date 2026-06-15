@@ -3,7 +3,7 @@
 import { useMemo, useState } from 'react'
 import { ArrowRight, Users, Briefcase, Clock, Sparkles, Languages, GraduationCap } from 'lucide-react'
 import type { EnrichedProfile } from '@/types'
-import { INDUSTRY_TREE, INDUSTRY_PARENTS } from '@/lib/taxonomy2'
+import { INDUSTRY_TREE, INDUSTRY_LABELS } from '@/lib/taxonomy2'
 import { FUNCTIONS } from '@/lib/taxonomy'
 import { parseAllLanguages } from '@/lib/search'
 import {
@@ -43,10 +43,7 @@ const CONFIDENCE_CFG: Record<Confidence, { label: string; cls: string; note: str
 
 // Industry options are now generated dynamically inside the component
 // to filter out 0-count entries.
-const ALL_INDUSTRIES_FLAT = [
-  ...INDUSTRY_PARENTS,
-  ...INDUSTRY_TREE.filter(n => n.label !== n.parent).map(n => n.label)
-]
+const ALL_INDUSTRIES_FLAT = INDUSTRY_LABELS
 
 const FUNCTION_LABELS = FUNCTIONS.map((c) => c.label).sort((a, b) => a.localeCompare(b))
 
@@ -351,10 +348,22 @@ export function SwitchClient({
                 <div>
                   <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Your Profile</p>
                   <div className="flex flex-col gap-1.5">
-                    {self && ((() => {
-                      const allSkills = Array.from(new Set([...(self.skills ?? []), ...(self.li_skills ?? [])]))
-                      return allSkills.length > 0 ? (
-                      allSkills.map((skill) => {
+                    {(() => {
+                      if (!self) {
+                        return <p className="text-xs text-gray-400 italic">Profile not linked.</p>
+                      }
+                      const _allSkills = Array.from(new Set([...(self.skills ?? []), ...(self.li_skills ?? [])]))
+                      const rankVal = (level: string | undefined) => level === 'strong' ? 3 : level === 'normal' ? 2 : 1
+                      const allSkills = _allSkills.sort((a, b) => {
+                        const valA = rankVal(self.categorized_skills?.[a])
+                        const valB = rankVal(self.categorized_skills?.[b])
+                        if (valA !== valB) return valB - valA
+                        return a.localeCompare(b)
+                      })
+                      if (allSkills.length === 0) {
+                        return <p className="text-xs text-gray-400 italic">No skills listed.</p>
+                      }
+                      return allSkills.map((skill) => {
                         const str = self.categorized_skills?.[skill] || 'normal'
                         const isStrong = str === 'strong'
                         const isBeginner = str === 'beginner'
@@ -366,10 +375,7 @@ export function SwitchClient({
                           </div>
                         )
                       })
-                    ) : (
-                      <p className="text-xs text-gray-400 italic">No skills listed.</p>
-                    );
-                    })())}
+                    })()}
                   </div>
                 </div>
 

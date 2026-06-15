@@ -563,8 +563,90 @@ export type Token =
   | { type: 'term'; value: string; display: string }
   /** Auto-detected multi-word term locked as a phrase (e.g. "supply chain") */
   | { type: 'multiword'; value: string; display: string }
+  /** INSEAD club name locked as one token (value = canonical club name). */
+  | { type: 'club'; value: string; display: string }
 
-export function parseQuery(raw: string): Token[] {
+// ─────────────────────────────────────────────
+// INSEAD club name recognition
+//
+// Club names ("Consulting Club", "Investment Management Club (IMC)") are made
+// first-class search terms: typed in full they lock as a single `club` token
+// instead of being split into ordinary words. That token then matches ONLY the
+// actual leaders of that club (via the dedicated `club` index bucket), and the
+// UI surfaces each person's position. The alias index is data-driven — built
+// from whatever clubs exist in the loaded profiles — so it never goes stale.
+// ─────────────────────────────────────────────
+
+export interface ClubAlias {
+  /** Canonical club name as stored in profile.clubRoles[].club */
+  canonical: string
+  /** Normalised words a user must type (contiguously) to match this club */
+  words: string[]
+}
+export interface ClubIndex {
+  /** Aliases sorted most-words-first so the most specific phrase wins. */
+  entries: ClubAlias[]
+}
+
+/** Lowercase, expand "&"→"and", strip punctuation, split into words. */
+function clubNormalizeWords(s: string): string[] {
+  return s
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .split(/\s+/)
+    .filter(Boolean)
+}
+
+/**
+ * Build a club alias index from the distinct club names in the directory.
+ * Each club yields up to three aliases: the full name, the name without its
+ * parenthetical acronym, and the acronym itself. Single-word aliases that
+ * collide with a geo macro-group (e.g. "LATAM", "MENA") are skipped so region
+ * searches keep working — users can still type the full club name for those.
+ */
+export function buildClubIndex(clubNames: string[]): ClubIndex {
+  const geoKeys = new Set(Object.keys(GEO_GROUPS))
+  const seen = new Set<string>()
+  const entries: ClubAlias[] = []
+
+  const addAlias = (phrase: string, canonical: string) => {
+    const words = clubNormalizeWords(phrase)
+    if (words.length === 0) return
+    if (words.length === 1 && geoKeys.has(words[0])) return // avoid LATAM/MENA geo clash
+    const key = words.join(' ')
+    if (seen.has(key)) return
+    seen.add(key)
+    entries.push({ canonical, words })
+  }
+
+  for (const canonical of clubNames) {
+    const lower = canonical.toLowerCase()
+    addAlias(lower, canonical)                          // full: "consulting club"
+    addAlias(lower.replace(/\([^)]*\)/g, ' '), canonical) // no acronym: "investment management club"
+    const m = canonical.match(/\(([^)]+)\)/)
+    if (m) addAlias(m[1], canonical)                   // acronym: "imc"
+  }
+
+  entries.sort((a, b) => b.words.length - a.words.length)
+  return { entries }
+}
+
+/** Index of the first contiguous occurrence of `needle` within `hay`, or -1. */
+function findContiguous(hay: string[], needle: string[]): number {
+  if (needle.length === 0 || needle.length > hay.length) return -1
+  for (let i = 0; i + needle.length <= hay.length; i++) {
+    let ok = true
+    for (let j = 0; j < needle.length; j++) {
+      if (hay[i + j] !== needle[j]) { ok = false; break }
+    }
+    if (ok) return i
+  }
+  return -1
+}
+
+export function parseQuery(raw: string, clubIndex?: ClubIndex): Token[] {
   if (!raw.trim()) return []
   const tokens: Token[] = []
   let remaining = raw.toLowerCase().trim()
@@ -574,6 +656,23 @@ export function parseQuery(raw: string): Token[] {
     tokens.push({ type: 'phrase', value: phrase.trim(), display: `"${phrase.trim()}"` })
     return ' '
   })
+
+  // 1b. INSEAD club names — lock "Consulting Club" as ONE token rather than
+  //     letting it split into "consulting" + "club" (which would match every
+  //     consultant). Detected via the data-driven alias index, longest first.
+  if (clubIndex && clubIndex.entries.length) {
+    let words = clubNormalizeWords(remaining)
+    if (words.length) {
+      for (const e of clubIndex.entries) {
+        const at = findContiguous(words, e.words)
+        if (at >= 0) {
+          tokens.push({ type: 'club', value: e.canonical, display: e.canonical })
+          words = [...words.slice(0, at), ...words.slice(at + e.words.length)]
+        }
+      }
+      remaining = ` ${words.join(' ')} `
+    }
+  }
 
   // 2. Geo groups (longest match first). Match on WORD BOUNDARIES so short keys
   // like "sea"/"cis"/"apac" don't trigger inside ordinary words
@@ -650,6 +749,8 @@ export interface SearchIndex {
   edu: ExpBucket[]
   /** Canonical taxonomy labels (industries + functions), lowercased */
   taxonomy: string[]
+  /** Lowercased canonical names of INSEAD clubs this person leads. */
+  club: string[]
   /** lowercased LinkedIn headline */
   headline: string
   /** lowercased LinkedIn about/summary */
@@ -725,7 +826,7 @@ export function buildSearchIndex(cv: EnrichedProfile): SearchIndex {
   const parts: SearchIndex = {
     all: [], company: [], university: [], location: [],
     skill: [], language: [], nationality: [], name: [cv.name],
-    jobs: [], edu: [], taxonomy: [], headline: '', about: '',
+    jobs: [], edu: [], taxonomy: [], club: [], headline: '', about: '',
   }
 
   // Unified CV⊕LinkedIn timeline when available — LinkedIn-only jobs become
@@ -838,11 +939,12 @@ export function buildSearchIndex(cv: EnrichedProfile): SearchIndex {
     }
   }
 
-  // INSEAD club leadership — searchable by club name or role title
-  // Also push to company so "Companies & Roles" scope finds them
+  // INSEAD club leadership lives in its own bucket, matched only by a locked
+  // `club` token (see parseQuery). Deliberately NOT added to company/taxonomy/all
+  // so that an industry search like "consulting" never drags in Consulting Club
+  // leaders — the club is found only when its name is typed in full.
   for (const cr of cv.clubRoles || []) {
-    if (cr.club) { parts.taxonomy.push(cr.club.toLowerCase()); parts.company.push(cr.club.toLowerCase()) }
-    if (cr.role) { parts.taxonomy.push(cr.role.toLowerCase()); parts.company.push(cr.role.toLowerCase()) }
+    if (cr.club) parts.club.push(cr.club.toLowerCase())
   }
 
   parts.all = [
@@ -884,6 +986,10 @@ function tokenMatches(token: Token, entry: IndexedProfile, filter: SearchField):
   if (token.type === 'geo') {
     const locs = [...entry.idx.location, ...entry.idx.nationality]
     return token.countries.some((c) => locs.some((loc) => geoMatches(loc, c)))
+  }
+  // Club token: exact membership in the person's club-leadership list.
+  if (token.type === 'club') {
+    return entry.idx.club.includes(token.value.toLowerCase())
   }
   const q = token.value
   const targets = filter === 'all' ? entry.idx.all : entry.idx[filter] || []
@@ -1024,7 +1130,7 @@ export interface StrengthResult {
 }
 
 interface TokenMatcher {
-  type: 'text' | 'geo'
+  type: 'text' | 'geo' | 'club'
   /** The same word + morphological stems (high-confidence, quality 2). */
   words: string[]
   /** Synonyms — different lemmas (low-confidence, quality 1). */
@@ -1044,6 +1150,10 @@ export function buildMatchers(tokens: Token[]): TokenMatcher[] {
   return tokens.map((tok) => {
     if (tok.type === 'geo') {
       return { type: 'geo', words: [], syns: [], countries: tok.countries, isLang: false }
+    }
+    if (tok.type === 'club') {
+      // words[0] holds the canonical club name (lowercased) for exact matching.
+      return { type: 'club', words: [tok.value.toLowerCase()], syns: [], countries: [], isLang: false }
     }
     const v = tok.value.toLowerCase()
     const words = new Set<string>([v, ...stemWord(v)])
@@ -1083,6 +1193,9 @@ const W_DESC_FIRST = 0.55  // primary achievement bullet — more important
 const W_DESC_REST = 0.38   // supporting bullets — diminishing evidence
 const W_NAT = 0.4
 const W_ABOUT = 0.4
+// A locked club token is an exact, high-confidence membership match — score it
+// as a top-tier (strong) signal so club leaders rank above incidental hits.
+const W_CLUB = 1.0
 const RECENT_MULT = 1.25
 
 /**
@@ -1119,6 +1232,11 @@ export function scoreStrength(
       })
       if (m.countries.some((c) => geoMatches(natText, c))) w = Math.max(w, W_NAT)
       weights[i] = w
+      continue
+    }
+
+    if (m.type === 'club') {
+      weights[i] = idx.club.includes(m.words[0]) ? W_CLUB : 0
       continue
     }
 
@@ -1213,6 +1331,10 @@ export function highlightTerms(tokens: Token[]): string[] {
 
   for (const tok of tokens) {
     if (tok.type === 'geo') continue
+    if (tok.type === 'club') {
+      for (const w of tok.value.toLowerCase().split(/\s+/)) add(w)
+      continue
+    }
     const q = tok.value
     if (!q) continue
     // Original query value + every synonym variant + stems — so that "airlines"

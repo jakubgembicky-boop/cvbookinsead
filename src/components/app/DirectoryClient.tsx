@@ -7,6 +7,7 @@ import type { EnrichedProfile } from '@/types'
 import {
   parseQuery,
   buildSearchIndex,
+  buildClubIndex,
   matchesAll,
   buildMatchers,
   scoreStrength,
@@ -96,6 +97,7 @@ function PartialSection({
   group,
   tokens,
   terms,
+  activeClubs,
   setSelected,
   selectedEmails,
   toggleSelect,
@@ -103,6 +105,7 @@ function PartialSection({
   group: PartialGroup
   tokens: Token[]
   terms: string[]
+  activeClubs: string[]
   setSelected: (cv: EnrichedProfile) => void
   selectedEmails: Set<string>
   toggleSelect: (cv: EnrichedProfile) => void
@@ -140,6 +143,7 @@ function PartialSection({
               key={`${sc.entry.cv.profileId || sc.entry.cv.inseadEmail || sc.entry.cv.name || 'cv'}-partial-${i}`}
               cv={sc.entry.cv}
               terms={terms}
+              activeClubs={activeClubs}
               strength={sc.strength.tier}
               onClick={() => setSelected(sc.entry.cv)}
               isSelected={selectedEmails.has(sc.entry.cv.inseadEmail.toLowerCase())}
@@ -197,6 +201,9 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
     return [...s].sort()
   }, [profiles])
 
+  // Alias index so the search bar recognises club names as single tokens
+  const clubIndex = useMemo(() => buildClubIndex(clubOptions), [clubOptions])
+
   // Pre-build the search index once per profile set
   const indexed = useMemo(
     () => profiles.map((cv) => ({ cv, idx: buildSearchIndex(cv) })),
@@ -214,9 +221,16 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
     })
   }, [indexed, clubFilter])
 
-  const tokens = useMemo(() => parseQuery(query), [query])
+  const tokens = useMemo(() => parseQuery(query, clubIndex), [query, clubIndex])
   const terms = useMemo(() => highlightTerms(tokens), [tokens])
   const matchers = useMemo(() => buildMatchers(tokens), [tokens])
+
+  // Canonical club names in the active query — used to surface each leader's
+  // position on their card when searching for a specific club.
+  const activeClubs = useMemo(
+    () => tokens.filter((t): t is Extract<Token, { type: 'club' }> => t.type === 'club').map((t) => t.value),
+    [tokens]
+  )
 
   // Full vs partial matches, each scored for strength and ordered strongest-first
   const { full, rest } = useMemo(() => {
@@ -311,7 +325,7 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
         <input
           type="text"
           autoComplete="off"
-          placeholder='Try "supply chain Czechia", "private equity France", or "speaks Arabic"…'
+          placeholder='Try "supply chain Czechia", "Consulting Club", or "speaks Arabic"…'
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="w-full h-12 rounded-lg border border-gray-200 bg-white pl-10 pr-10 text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#003781] focus:border-transparent shadow-sm"
@@ -336,12 +350,15 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
               className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium ${
                 tok.type === 'geo'
                   ? 'bg-[#E4002B]/10 text-[#E4002B]'
-                  : tok.type === 'multiword'
-                    ? 'bg-teal-100 text-teal-800'
-                    : 'bg-[#003781]/10 text-[#003781]'
+                  : tok.type === 'club'
+                    ? 'bg-[#E4002B]/15 text-[#E4002B] ring-1 ring-[#E4002B]/30'
+                    : tok.type === 'multiword'
+                      ? 'bg-teal-100 text-teal-800'
+                      : 'bg-[#003781]/10 text-[#003781]'
               }`}
             >
               {tok.type === 'geo' && <span aria-hidden>📍</span>}
+              {tok.type === 'club' && <Award className="h-3 w-3" aria-hidden />}
               {tok.type === 'multiword' && <span aria-hidden>🔗</span>}
               {tok.display}
               <button
@@ -469,6 +486,7 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
               key={`${entry.cv.profileId || entry.cv.inseadEmail || entry.cv.name || 'cv'}-${i}`}
               cv={entry.cv}
               terms={terms}
+              activeClubs={activeClubs}
               onClick={() => setSelected(entry.cv)}
               isSelected={selectedEmails.has(entry.cv.inseadEmail.toLowerCase())}
               onToggleSelect={() => toggleSelect(entry.cv)}
@@ -494,6 +512,7 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
                     key={`pin-${sc.entry.cv.profileId || sc.entry.cv.name || i}`}
                     cv={sc.entry.cv}
                     terms={terms}
+                    activeClubs={activeClubs}
                     strength={sc.strength.tier}
                     onClick={() => setSelected(sc.entry.cv)}
                     isSelected={selectedEmails.has(sc.entry.cv.inseadEmail.toLowerCase())}
@@ -512,6 +531,7 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
                   key={`${sc.entry.cv.profileId || sc.entry.cv.inseadEmail || sc.entry.cv.name || 'cv'}-${i}`}
                   cv={sc.entry.cv}
                   terms={terms}
+                  activeClubs={activeClubs}
                   strength={sc.strength.tier}
                   onClick={() => setSelected(sc.entry.cv)}
                   isSelected={selectedEmails.has(sc.entry.cv.inseadEmail.toLowerCase())}
@@ -545,6 +565,7 @@ export function DirectoryClient({ profiles, initialSelected = [] }: DirectoryCli
               group={group}
               tokens={tokens}
               terms={terms}
+              activeClubs={activeClubs}
               setSelected={setSelected}
               selectedEmails={selectedEmails}
               toggleSelect={toggleSelect}

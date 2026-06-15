@@ -1,6 +1,6 @@
 'use client'
 
-import { Star } from 'lucide-react'
+import { Star, Award } from 'lucide-react'
 import type { EnrichedProfile } from '@/types'
 import { parseAllLanguages, type StrengthTier } from '@/lib/search'
 import { Highlight } from './Highlight'
@@ -123,6 +123,7 @@ export function ProfileCard({
   cv,
   terms,
   strength,
+  activeClubs,
   onClick,
   isSelected,
   onToggleSelect,
@@ -130,6 +131,8 @@ export function ProfileCard({
   cv: EnrichedProfile
   terms: string[]
   strength?: StrengthTier
+  /** Canonical club names in the active query — shows this person's position. */
+  activeClubs?: string[]
   onClick: () => void
   /** Contact-book star state; star hidden when onToggleSelect is undefined */
   isSelected?: boolean
@@ -137,6 +140,14 @@ export function ProfileCard({
 }) {
   const photo = cv.photo || cv.li_photo_url
   const { company, role } = preInseadRole(cv)
+
+  // When searching for a specific club, surface this person's position in it.
+  const clubMatches =
+    activeClubs?.length && cv.clubRoles?.length
+      ? cv.clubRoles.filter((cr) =>
+          activeClubs.some((c) => c.toLowerCase() === cr.club.toLowerCase())
+        )
+      : []
 
   // Top 3 languages with CEFR for colour-coding (compound entries split out)
   // Sort by proficiency: C2 > C1 > B2 > B1 > A2 > A1 > unknown
@@ -194,6 +205,21 @@ export function ProfileCard({
               <Highlight text={company} terms={terms} />
             </span>
           )}
+        </div>
+      )}
+
+      {clubMatches.length > 0 && (
+        <div className="mt-2 flex flex-wrap justify-center gap-1">
+          {clubMatches.map((cr, i) => (
+            <span
+              key={i}
+              title={`${cr.club} — ${cr.role}`}
+              className="inline-flex items-center gap-1 rounded-full bg-[#E4002B]/10 px-2 py-0.5 text-[10px] font-semibold text-[#E4002B]"
+            >
+              <Award className="h-2.5 w-2.5" aria-hidden />
+              {cr.role}
+            </span>
+          ))}
         </div>
       )}
 

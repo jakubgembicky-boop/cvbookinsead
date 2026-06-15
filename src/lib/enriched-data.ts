@@ -81,7 +81,7 @@ function loadClubRoles(): Record<string, { club: string; role: string }[]> {
   if (!_clubRoles) {
     try {
       _clubRoles = JSON.parse(
-        fs.readFileSync(path.join(process.cwd(), 'data', 'club_roles.json'), 'utf-8')
+        fs.readFileSync(resolveDataPath('club_roles.json'), 'utf-8')
       ) as Record<string, { club: string; role: string }[]>
     } catch {
       _clubRoles = {}

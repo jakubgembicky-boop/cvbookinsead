@@ -31,22 +31,10 @@ export const INDUSTRY_TREE: IndustryNode[] = [
   { label: 'Economic & Public Sector Consulting', parent: 'Consulting', keywords: ['economic consulting', 'public sector consulting', 'policy advisory', 'government advisory'] },
   
   // Finance
-  { label: 'Investment Banking', parent: 'Finance', keywords: ['investment banking', 'm&a advisory', 'capital markets', 'ecm', 'dcm', 'leveraged finance'] },
-  { label: 'Private Equity', parent: 'Finance', keywords: ['private equity', 'buyout', 'lbo', 'growth equity'] },
-  { label: 'Venture Capital', parent: 'Finance', keywords: ['venture capital', 'seed investing', 'early-stage investing', 'accelerator'] },
-  { label: 'Asset & Wealth Management', parent: 'Finance', keywords: ['asset management', 'wealth management', 'portfolio management', 'fund management', 'private banking'] },
-  { label: 'Hedge Funds & Trading', parent: 'Finance', keywords: ['hedge fund', 'prop trading', 'quantitative trading', 'sales and trading'] },
-  { label: 'Retail & Commercial Banking', parent: 'Finance', keywords: ['retail banking', 'commercial banking', 'corporate banking', 'credit analysis', 'lending'] },
-  { label: 'Insurance', parent: 'Finance', keywords: ['insurance', 'reinsurance', 'actuarial', 'underwriting'] },
-  { label: 'Fintech & Payments', parent: 'Finance', keywords: ['fintech', 'payments', 'digital banking', 'crypto', 'blockchain'] },
+  { label: 'Finance', parent: 'Finance', keywords: ['investment banking', 'm&a advisory', 'capital markets', 'ecm', 'dcm', 'leveraged finance', 'private equity', 'buyout', 'lbo', 'growth equity', 'venture capital', 'seed investing', 'early-stage investing', 'accelerator', 'asset management', 'wealth management', 'portfolio management', 'fund management', 'private banking', 'hedge fund', 'prop trading', 'quantitative trading', 'sales and trading', 'retail banking', 'commercial banking', 'corporate banking', 'credit analysis', 'lending', 'insurance', 'reinsurance', 'actuarial', 'underwriting', 'fintech', 'payments', 'digital banking', 'crypto', 'blockchain'] },
   
   // Technology & Telecom
-  { label: 'Software & SaaS', parent: 'Technology & Telecom', keywords: ['software', 'saas', 'enterprise software', 'cloud computing'] },
-  { label: 'Internet & Consumer Tech', parent: 'Technology & Telecom', keywords: ['marketplace', 'e-commerce platform', 'consumer app', 'social media', 'ride-hailing', 'delivery platform'] },
-  { label: 'Semiconductors & Hardware', parent: 'Technology & Telecom', keywords: ['semiconductor', 'chip', 'hardware', 'electronics manufacturing'] },
-  { label: 'Cybersecurity', parent: 'Technology & Telecom', keywords: ['cybersecurity', 'information security'] },
-  { label: 'Telecom', parent: 'Technology & Telecom', keywords: ['telecom', 'telecommunications', 'mobile network', 'broadband'] },
-  { label: 'IT Services & Data', parent: 'Technology & Telecom', keywords: ['it services', 'data analytics services', 'business intelligence', 'outsourcing'] },
+  { label: 'Technology & Telecom', parent: 'Technology & Telecom', keywords: ['software', 'saas', 'enterprise software', 'cloud computing', 'marketplace', 'e-commerce platform', 'consumer app', 'social media', 'ride-hailing', 'delivery platform', 'semiconductor', 'chip', 'hardware', 'electronics manufacturing', 'cybersecurity', 'information security', 'telecom', 'telecommunications', 'mobile network', 'broadband', 'it services', 'data analytics services', 'business intelligence', 'outsourcing'] },
   
   // Flat / Consolidated Industries
   { label: 'Healthcare & Pharma', parent: 'Healthcare & Pharma', keywords: ['pharmaceutical', 'biotech', 'medtech', 'hospital', 'clinical', 'healthcare', 'life sciences'] },
@@ -126,11 +114,11 @@ export function canonicalizeCompany(company: string): string {
 
 const NAME_PATTERNS: [RegExp, string][] = [
   [/consult|advisory|advisors/i, 'Strategy & Management Consulting'],
-  [/\b(capital|partners|equity|invest(ments?)?)\b/i, 'Private Equity'],
-  [/\bventures?\b|\bvc\b/i, 'Venture Capital'],
-  [/\bbank(ing)?\b/i, 'Retail & Commercial Banking'],
-  [/asset management|wealth/i, 'Asset & Wealth Management'],
-  [/insurance|assurance|seguros/i, 'Insurance'],
+  [/\b(capital|partners|equity|invest(ments?)?)\b/i, 'Finance'],
+  [/\bventures?\b|\bvc\b/i, 'Finance'],
+  [/\bbank(ing)?\b/i, 'Finance'],
+  [/asset management|wealth/i, 'Finance'],
+  [/insurance|assurance|seguros/i, 'Finance'],
   [/\b(law|legal|attorneys|abogados|llp)\b/i, 'Professional & Legal Services'],
   [/universit|school|college|institute of technology|polytechnic/i, 'Public Sector, NGO & Education'],
   [/ministry|government|authority|agency|commission|municipal/i, 'Public Sector, NGO & Education'],

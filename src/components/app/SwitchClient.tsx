@@ -11,9 +11,19 @@ import {
   gapAnalysis,
   targetLanguages,
   cefrRank,
+  selectTopSkills,
+  priorityGaps,
+  expertsForSkill,
+  ownedLevel,
   ABROAD,
 } from '@/lib/switch-model'
-import type { SwitchQuery, ProfileWithSteps, Confidence, Mover } from '@/lib/switch-model'
+import type {
+  SwitchQuery,
+  ProfileWithSteps,
+  Confidence,
+  Mover,
+  PriorityGap,
+} from '@/lib/switch-model'
 import { parentOf } from '@/lib/taxonomy2'
 import { ProfileCard } from './ProfileCard'
 import { ProfileModal } from './ProfileModal'
@@ -203,6 +213,43 @@ export function SwitchClient({
     return industryDict[fn]
   }, [query.toIndustry, query.toFunction, marketSkills])
 
+  // Skills the target move "demands" — union of market pulse + cohort movers.
+  const demandSet = useMemo(() => {
+    const s = new Set<string>()
+    if (marketPulseSkills) for (const k of Object.keys(marketPulseSkills)) s.add(k)
+    for (const [skill] of result.commonSkills) s.add(skill)
+    return s
+  }, [marketPulseSkills, result.commonSkills])
+
+  // The user's top 15 skills, balanced between strength and target relevance.
+  const topSkills = useMemo(() => selectTopSkills(self, demandSet, 15), [self, demandSet])
+
+  // 2–3 priority skills to work on (demanded but missing / only beginner).
+  const gapPriorities = useMemo(
+    () => priorityGaps(self, marketPulseSkills, result.commonSkills, 3),
+    [self, marketPulseSkills, result.commonSkills]
+  )
+
+  // For each priority gap, who to contact (movers strong in it, else cohort experts).
+  const gapExperts = useMemo(() => {
+    const moverProfiles = result.movers.map((m) => m.profile)
+    return gapPriorities.map((g) => ({
+      gap: g,
+      experts: expertsForSkill(g.skill, moverProfiles, profiles, self, 2),
+    }))
+  }, [gapPriorities, result.movers, profiles, self])
+
+  // Profiles a reviewer should highlight in the mover grid: those strong in a gap skill.
+  const moverGapHelp = useMemo(() => {
+    const map = new Map<EnrichedProfile, string[]>()
+    for (const { gap, experts } of gapExperts) {
+      for (const p of experts.movers) {
+        map.set(p, [...(map.get(p) ?? []), gap.skill])
+      }
+    }
+    return map
+  }, [gapExperts])
+
   // Language lens — default to English if country unrecognized
   const langInfo = useMemo(() => {
     const langs = targetLanguages(query.toCountry)
@@ -344,43 +391,42 @@ export function SwitchClient({
               </p>
               
               <div className="grid md:grid-cols-3 gap-4 border-t border-gray-100 pt-4">
-                {/* Column 1: Your Skills (Assessed) */}
+                {/* Column 1: Your Skills (top 15, balanced strength + relevance) */}
                 <div>
-                  <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-2">Your Profile</p>
-                  <div className="flex flex-col gap-1.5">
-                    {(() => {
-                      if (!self) {
-                        return <p className="text-xs text-gray-400 italic">Profile not linked.</p>
-                      }
-                      const _allSkills = Array.from(new Set([
-                          ...(self.skills ?? []), 
-                          ...(self.li_skills ?? []),
-                          ...Object.keys(self.categorized_skills || {})
-                        ]))
-                      const rankVal = (level: string | undefined) => level === 'strong' ? 3 : level === 'normal' ? 2 : 1
-                      const allSkills = _allSkills.sort((a, b) => {
-                        const valA = rankVal(self.categorized_skills?.[a])
-                        const valB = rankVal(self.categorized_skills?.[b])
-                        if (valA !== valB) return valB - valA
-                        return a.localeCompare(b)
-                      })
-                      if (allSkills.length === 0) {
-                        return <p className="text-xs text-gray-400 italic">No skills listed.</p>
-                      }
-                      return allSkills.map((skill) => {
-                        const str = self.categorized_skills?.[skill] || 'normal'
-                        const isStrong = str === 'strong'
-                        const isBeginner = str === 'beginner'
+                  <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider mb-2">
+                    Your Profile <span className="text-gray-300 normal-case">· top 15</span>
+                  </p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {!self ? (
+                      <p className="text-xs text-gray-400 italic">Profile not linked.</p>
+                    ) : topSkills.length === 0 ? (
+                      <p className="text-xs text-gray-400 italic">No skills listed.</p>
+                    ) : (
+                      topSkills.map(({ skill, level, demanded }) => {
+                        // Green = your skill. Filled = strong, outline = normal, dotted = beginner.
+                        const cls =
+                          level === 'strong'
+                            ? 'bg-green-100 text-green-800 border border-green-100'
+                            : level === 'normal'
+                              ? 'bg-green-50 text-green-700 border border-green-200'
+                              : 'border border-dotted border-gray-300 text-gray-500'
                         return (
-                          <div key={skill} className={`inline-flex items-center text-xs font-medium px-2 py-1 rounded-md w-fit
-                            ${isStrong ? 'bg-blue-100 text-blue-800' : isBeginner ? 'border border-dotted border-gray-300 text-gray-500' : 'border border-blue-200 text-blue-700 bg-blue-50'}
-                          `}>
+                          <span
+                            key={skill}
+                            title={`${level}${demanded ? ' · in demand for this move' : ''}`}
+                            className={`inline-flex items-center gap-1 text-xs font-medium px-2 py-1 rounded-md ${cls}`}
+                          >
                             {skill}
-                          </div>
+                            {demanded && <span className="text-[9px] text-green-500">●</span>}
+                          </span>
                         )
                       })
-                    })()}
+                    )}
                   </div>
+                  <p className="mt-2 text-[10px] text-gray-400">
+                    Filled = strong · outline = normal · dotted = beginner ·{' '}
+                    <span className="text-green-500">●</span> in demand for this move
+                  </p>
                 </div>
 
                 {/* Column 2: Cohort Movers */}
@@ -416,12 +462,13 @@ export function SwitchClient({
                         .sort((a, b) => b[1] - a[1])
                         .slice(0, 10)
                         .map(([skill, freq]) => {
-                          const have = gaps.has.includes(skill)
+                          const lvl = ownedLevel(self, skill)
+                          const have = lvl === 'strong' || lvl === 'normal'
                           return (
                             <div key={skill} className={`inline-flex items-center justify-between text-xs px-2 py-1 rounded-md w-full max-w-[200px] border
                               ${have ? 'border-green-200 bg-green-50 text-green-700 font-medium' : 'border-amber-200 bg-amber-50 text-amber-800'}
                             `}>
-                              <span className="truncate mr-2">{skill}</span>
+                              <span className="truncate mr-2">{skill}{have && ' ✓'}</span>
                               <span className="font-semibold text-[10px]">{freq}%</span>
                             </div>
                           )
@@ -432,6 +479,58 @@ export function SwitchClient({
                   </div>
                 </div>
               </div>
+
+              {/* Priority skills to work on */}
+              {self && gapPriorities.length > 0 && (
+                <div className="mt-4 border-t border-gray-100 pt-4">
+                  <p className="text-xs font-bold uppercase tracking-wider text-[#E4002B] mb-1">
+                    Work on these next
+                  </p>
+                  <p className="text-[11px] text-gray-400 mb-3">
+                    Highest-demand skills for this move that you don&apos;t have yet — in priority order.
+                  </p>
+                  <div className="flex flex-col gap-2">
+                    {gapExperts.map(({ gap, experts }, i) => {
+                      const helpers = experts.movers.length ? experts.movers : experts.side
+                      const fromMovers = experts.movers.length > 0
+                      return (
+                        <div
+                          key={gap.skill}
+                          className="flex flex-wrap items-center gap-2 rounded-lg bg-[#E4002B]/[0.03] border border-[#E4002B]/10 px-3 py-2"
+                        >
+                          <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#E4002B] text-[10px] font-bold text-white">
+                            {i + 1}
+                          </span>
+                          <span className="text-sm font-semibold text-gray-900">{gap.skill}</span>
+                          <span className="rounded-full bg-amber-50 px-2 py-0.5 text-[10px] font-semibold text-amber-700">
+                            {gap.demand}% demand
+                          </span>
+                          {gap.owned === 'beginner' && (
+                            <span className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] text-gray-500">
+                              you: beginner
+                            </span>
+                          )}
+                          {helpers.length > 0 && (
+                            <span className="ml-auto flex items-center gap-1.5 text-[11px] text-gray-500">
+                              <Users className="h-3 w-3 text-gray-400" />
+                              {fromMovers ? 'mover who can help:' : 'ask:'}
+                              {helpers.slice(0, 2).map((p) => (
+                                <button
+                                  key={p.inseadEmail || p.name}
+                                  onClick={() => setSelected({ cv: p, terms: [gap.skill] })}
+                                  className="font-medium text-[#003781] hover:underline"
+                                >
+                                  {p.name.split(' ')[0]}
+                                </button>
+                              ))}
+                            </span>
+                          )}
+                        </div>
+                      )
+                    })}
+                  </div>
+                </div>
+              )}
             </div>
           )}
 
@@ -502,7 +601,7 @@ export function SwitchClient({
               <p className="text-xs font-semibold uppercase tracking-wider text-gray-400 mb-3">
                 Who to talk to
               </p>
-              <MoverGrid movers={result.movers} onSelect={openMover} reachable={moverAtOrBelow} />
+              <MoverGrid movers={result.movers} onSelect={openMover} reachable={moverAtOrBelow} gapHelp={moverGapHelp} />
             </div>
           )}
 
@@ -551,33 +650,46 @@ function MoverGrid({
   movers,
   onSelect,
   reachable,
+  gapHelp,
 }: {
   movers: Mover[]
   onSelect: (m: Mover) => void
   reachable: Set<EnrichedProfile>
+  gapHelp?: Map<EnrichedProfile, string[]>
 }) {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-      {movers.map((m, i) => (
-        <div key={`${m.profile.inseadEmail || m.profile.name}-${i}`} className="flex flex-col gap-1">
-          <ProfileCard cv={m.profile} terms={[]} onClick={() => onSelect(m)} />
-          <div className="flex flex-wrap justify-center gap-1 px-1">
-            {m.viaInternship && (
-              <span className="inline-flex items-center gap-0.5 rounded-full bg-purple-50 px-1.5 py-0.5 text-[9px] font-semibold text-purple-600">
-                <GraduationCap className="h-2.5 w-2.5" /> via internship
-              </span>
-            )}
-            {reachable.has(m.profile) && (
-              <span className="rounded-full bg-green-50 px-1.5 py-0.5 text-[9px] font-semibold text-green-600">
-                ✓ reachable
-              </span>
-            )}
+      {movers.map((m, i) => {
+        const helps = gapHelp?.get(m.profile)
+        return (
+          <div
+            key={`${m.profile.inseadEmail || m.profile.name}-${i}`}
+            className={`flex flex-col gap-1 ${helps ? 'rounded-xl ring-2 ring-[#E4002B]/40 ring-offset-2' : ''}`}
+          >
+            <ProfileCard cv={m.profile} terms={helps ?? []} onClick={() => onSelect(m)} />
+            <div className="flex flex-wrap justify-center gap-1 px-1">
+              {helps && helps.map((s) => (
+                <span key={s} className="inline-flex items-center rounded-full bg-[#E4002B]/10 px-1.5 py-0.5 text-[9px] font-semibold text-[#E4002B]">
+                  can help: {s}
+                </span>
+              ))}
+              {m.viaInternship && (
+                <span className="inline-flex items-center gap-0.5 rounded-full bg-purple-50 px-1.5 py-0.5 text-[9px] font-semibold text-purple-600">
+                  <GraduationCap className="h-2.5 w-2.5" /> via internship
+                </span>
+              )}
+              {reachable.has(m.profile) && (
+                <span className="rounded-full bg-green-50 px-1.5 py-0.5 text-[9px] font-semibold text-green-600">
+                  ✓ reachable
+                </span>
+              )}
+            </div>
+            <p className="text-[10px] text-gray-400 text-center leading-tight px-1">
+              {m.fromStep.company} → {m.toStep.company}
+            </p>
           </div>
-          <p className="text-[10px] text-gray-400 text-center leading-tight px-1">
-            {m.fromStep.company} → {m.toStep.company}
-          </p>
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }

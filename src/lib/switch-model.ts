@@ -446,3 +446,121 @@ export function targetLanguages(toCountry: string | null): string[] {
   if (!toCountry || toCountry === ABROAD) return []
   return COUNTRY_LANGS[toCountry] ?? []
 }
+
+// ─────────────────────────────────────────────
+// Skill prioritisation (Career Switch skill panel)
+// ─────────────────────────────────────────────
+
+export type SkillLevel = 'strong' | 'normal' | 'beginner'
+
+const LEVEL_WEIGHT: Record<SkillLevel, number> = { strong: 3, normal: 2, beginner: 1 }
+
+/** The user's ranked level for a skill (from skills_ranked.json), or null. */
+export function ownedLevel(p: EnrichedProfile | null, skill: string): SkillLevel | null {
+  const v = p?.categorized_skills?.[skill]
+  return v === 'strong' || v === 'normal' || v === 'beginner' ? v : null
+}
+
+export interface RankedSkill {
+  skill: string
+  level: SkillLevel
+  demanded: boolean
+}
+
+/**
+ * Select the user's top N skills as a balance of strength and relevance to the
+ * target move. Score = strength weight + a demand bonus when the skill is asked
+ * for by the market or shown up among cohort movers.
+ */
+export function selectTopSkills(
+  self: EnrichedProfile | null,
+  demand: Set<string>,
+  n = 15
+): RankedSkill[] {
+  if (!self?.categorized_skills) return []
+  const rows: { skill: string; level: SkillLevel; demanded: boolean; score: number }[] = []
+  for (const [skill, lvlRaw] of Object.entries(self.categorized_skills)) {
+    const level = (lvlRaw === 'strong' || lvlRaw === 'normal' ? lvlRaw : 'beginner') as SkillLevel
+    const demanded = demand.has(skill)
+    const score = LEVEL_WEIGHT[level] + (demanded ? 2 : 0)
+    rows.push({ skill, level, demanded, score })
+  }
+  rows.sort((a, b) =>
+    b.score - a.score || (b.demanded ? 1 : 0) - (a.demanded ? 1 : 0) || a.skill.localeCompare(b.skill)
+  )
+  return rows.slice(0, n).map(({ skill, level, demanded }) => ({ skill, level, demanded }))
+}
+
+export interface PriorityGap {
+  skill: string
+  /** 0–100 demand signal (market % if available, else scaled cohort frequency) */
+  demand: number
+  /** what the user currently has: null (missing) or 'beginner' */
+  owned: SkillLevel | null
+  /** 'market' | 'cohort' | 'both' — where the demand evidence came from */
+  source: 'market' | 'cohort' | 'both'
+}
+
+/**
+ * The 2–3 highest-priority skills to work on: demanded by the target (market
+ * and/or cohort movers) but the user is missing them or only a beginner.
+ */
+export function priorityGaps(
+  self: EnrichedProfile | null,
+  marketSkills: Record<string, number> | null,
+  commonSkills: [string, number][],
+  n = 3
+): PriorityGap[] {
+  const moverMax = Math.max(1, ...commonSkills.map(([, c]) => c))
+  const demand = new Map<string, { score: number; market: boolean; cohort: boolean }>()
+
+  if (marketSkills) {
+    for (const [skill, pct] of Object.entries(marketSkills)) {
+      demand.set(skill, { score: pct, market: true, cohort: false })
+    }
+  }
+  for (const [skill, count] of commonSkills) {
+    const scaled = Math.round((count / moverMax) * 100)
+    const cur = demand.get(skill)
+    if (cur) { cur.cohort = true; cur.score = Math.max(cur.score, scaled) }
+    else demand.set(skill, { score: scaled, market: false, cohort: true })
+  }
+
+  const gaps: PriorityGap[] = []
+  for (const [skill, d] of demand) {
+    const lvl = ownedLevel(self, skill)
+    if (lvl === 'strong' || lvl === 'normal') continue // already covered
+    gaps.push({
+      skill,
+      demand: d.score,
+      owned: lvl, // null or 'beginner'
+      source: d.market && d.cohort ? 'both' : d.market ? 'market' : 'cohort',
+    })
+  }
+  gaps.sort((a, b) => b.demand - a.demand || a.skill.localeCompare(b.skill))
+  return gaps.slice(0, n)
+}
+
+export interface SkillExperts {
+  /** experts among the shown movers (preferred) */
+  movers: EnrichedProfile[]
+  /** fallback experts from the wider cohort when no mover is an expert */
+  side: EnrichedProfile[]
+}
+
+/** Find classmates who are 'strong' in a skill: movers first, then cohort. */
+export function expertsForSkill(
+  skill: string,
+  movers: EnrichedProfile[],
+  cohort: EnrichedProfile[],
+  self: EnrichedProfile | null,
+  maxSide = 2
+): SkillExperts {
+  const moverExperts = movers.filter((p) => ownedLevel(p, skill) === 'strong')
+  if (moverExperts.length > 0) return { movers: moverExperts, side: [] }
+  const moverSet = new Set(movers)
+  const side = cohort
+    .filter((p) => p !== self && !moverSet.has(p) && ownedLevel(p, skill) === 'strong')
+    .slice(0, maxSide)
+  return { movers: [], side }
+}

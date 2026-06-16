@@ -352,7 +352,11 @@ export function SwitchClient({
                       if (!self) {
                         return <p className="text-xs text-gray-400 italic">Profile not linked.</p>
                       }
-                      const _allSkills = Array.from(new Set([...(self.skills ?? []), ...(self.li_skills ?? [])]))
+                      const _allSkills = Array.from(new Set([
+                          ...(self.skills ?? []), 
+                          ...(self.li_skills ?? []),
+                          ...Object.keys(self.categorized_skills || {})
+                        ]))
                       const rankVal = (level: string | undefined) => level === 'strong' ? 3 : level === 'normal' ? 2 : 1
                       const allSkills = _allSkills.sort((a, b) => {
                         const valA = rankVal(self.categorized_skills?.[a])

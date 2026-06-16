@@ -81,7 +81,11 @@ export function ProfileModal({
 
   // Skills (CV + LinkedIn) — both already canonicalised server-side, so a plain
   // dedup collapses "PowerPoint"/"MS PowerPoint" etc. into one chip.
-  const _skillTags = uniq([...(cv.skills || []), ...(cv.li_skills || [])])
+  const _skillTags = uniq([
+    ...(cv.skills || []), 
+    ...(cv.li_skills || []), 
+    ...Object.keys(cv.categorized_skills || {})
+  ])
   const rankVal = (level: string | undefined) => level === 'strong' ? 3 : level === 'normal' ? 2 : 1
   const skillTags = _skillTags.sort((a, b) => {
     const valA = rankVal(cv.categorized_skills?.[a])

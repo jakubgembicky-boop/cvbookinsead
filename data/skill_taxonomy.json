@@ -1,0 +1,699 @@
+{
+  "_comment": "Canonical skill vocabulary. type drives ranking category; learning_curve drives thresholds.",
+  "skills": [
+    {
+      "canonical": "Leadership",
+      "type": "Soft_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "People Leadership",
+      "type": "Soft_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "Cross-functional Leadership",
+      "type": "Soft_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "Team Management",
+      "type": "Soft_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "Stakeholder Management",
+      "type": "Soft_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "Problem Solving",
+      "type": "Soft_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "Public Speaking",
+      "type": "Soft_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Negotiation",
+      "type": "Soft_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Teamwork",
+      "type": "Soft_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Communication",
+      "type": "Soft_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Organizational Behavior",
+      "type": "Soft_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Strategy",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Strategic Planning",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Consulting",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Management Consulting",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Strategy Consulting",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Entrepreneurship",
+      "type": "Hard_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "Operations",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Marketing",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Finance",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Corporate Finance",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Due Diligence",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "M&A",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Valuation",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Financial Modeling",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": [
+        "DCF"
+      ]
+    },
+    {
+      "canonical": "Financial Analysis",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Private Equity",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Go-to-Market",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Go-to-Market Strategy",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Market Research",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Business Development",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Business Planning",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Start-ups",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Supply Chain",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Logistics",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Procurement",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Regulatory & Compliance",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Audit",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Accounting",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "FP&A",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "P&L Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Pricing",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Forecasting",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Restructuring",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Fundraising",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Capital Markets",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Project Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Program Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Product Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Sales",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Sales Operations",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Data Analysis",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Analytics",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Data Visualization",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Digital Transformation",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Sustainability / ESG",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Real Estate",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Risk Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Change Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Brand Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Portfolio Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Lean / Six Sigma",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Investment Analysis",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Economic Analysis",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Statistical Analysis",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Machine Learning",
+      "type": "Hard_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "AI",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Quality Assurance",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Business Intelligence",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "E-Commerce",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Non-profit Management",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Venture Capital",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Agile",
+      "type": "Hard_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Legal",
+      "type": "Hard_Skills",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "Time Management",
+      "type": "Soft_Skills",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Excel",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "PowerPoint",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Power BI",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Microsoft Office",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": [
+        "Word"
+      ]
+    },
+    {
+      "canonical": "Tableau",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Looker",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Python",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "R",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "SQL",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "SAP",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Salesforce",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Jira",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Confluence",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "HubSpot",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Google Analytics",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Capital IQ",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Bloomberg",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Pitchbook",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Alteryx",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "MATLAB",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Stata",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "JavaScript",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Java",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "C++",
+      "type": "Tools_Technologies",
+      "learning_curve": "slow",
+      "aliases": []
+    },
+    {
+      "canonical": "VBA",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "CRM",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Cloud",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Adobe Creative Suite",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Google Ads",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "HTML",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "CSS",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "AutoCAD",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "AWS",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Git",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Figma",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Photoshop",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Canva",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "Notion",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    },
+    {
+      "canonical": "BigQuery",
+      "type": "Tools_Technologies",
+      "learning_curve": "medium",
+      "aliases": []
+    },
+    {
+      "canonical": "Qualtrics",
+      "type": "Tools_Technologies",
+      "learning_curve": "fast",
+      "aliases": []
+    }
+  ]
+}

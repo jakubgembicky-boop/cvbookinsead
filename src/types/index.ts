@@ -109,6 +109,9 @@ export interface ProfileOverrides {
   work_permits?: string[]
   languages?: string[]
   skills?: string[]
+  /** Per-skill proficiency override: { "Strategy": "strong", ... }. Overrides the
+   *  offline ranking from skills_ranked.json when present. */
+  categorized_skills?: Record<string, 'strong' | 'normal' | 'beginner'>
   phones?: string[]
   emails?: string[]
   personal_email?: string

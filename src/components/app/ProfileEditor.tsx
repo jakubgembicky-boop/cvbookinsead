@@ -205,7 +205,15 @@ export function ProfileEditor({ initial }: { initial: EnrichedProfile }) {
   const [langs, setLangs] = useState<LangPair[]>(
     (initial.languages.length ? initial.languages : initial.li_languages).map(parseLangPair)
   )
-  const [skills, setSkills] = useState<string[]>(initial.skills)
+  // Skill → proficiency. Seeded from the full ranked set so every skill is
+  // editable, not just the handful of self-listed ones.
+  type Level = 'strong' | 'normal' | 'beginner'
+  const seedSkills: Record<string, Level> = (() => {
+    const out: Record<string, Level> = { ...(initial.categorized_skills ?? {}) }
+    for (const s of initial.skills ?? []) if (!(s in out)) out[s] = 'normal'
+    return out
+  })()
+  const [skillLevels, setSkillLevels] = useState<Record<string, Level>>(seedSkills)
   const [skillInput, setSkillInput] = useState('')
 
   // Structured CV
@@ -246,7 +254,8 @@ export function ProfileEditor({ initial }: { initial: EnrichedProfile }) {
       personal_email: personalEmail.trim(),
       phones: phones.map((p) => p.trim()).filter(Boolean),
       languages: langs.filter((l) => l.lang.trim()).map(joinLangPair),
-      skills: skills.filter(Boolean),
+      skills: Object.keys(skillLevels),
+      categorized_skills: skillLevels,
       experience: experience.filter((e) => e.entity.trim()),
       education: education.filter((e) => e.entity.trim()),
       extra_curricular: extra.filter((e) => e.entity.trim()),
@@ -419,39 +428,79 @@ export function ProfileEditor({ initial }: { initial: EnrichedProfile }) {
 
       {/* Skills */}
       <Card>
-        <h2 className="text-lg font-semibold text-gray-900 mb-4">Skills</h2>
-        <div className="flex flex-wrap gap-2 mb-3">
-          {skills.map((s, i) => (
-            <span
-              key={i}
-              className="inline-flex items-center gap-1 rounded-full bg-[#003781]/8 px-2.5 py-1 text-xs text-[#003781]"
-            >
-              {s}
-              <button
-                onClick={() => setSkills((prev) => prev.filter((_, j) => j !== i))}
-                className="hover:opacity-70"
-                aria-label={`Remove ${s}`}
+        <h2 className="text-lg font-semibold text-gray-900 mb-1">Skills</h2>
+        <p className="text-xs text-gray-400 mb-4">
+          Set how strong you are in each skill. These drive your profile badges, search,
+          and the Career Switch tool.
+        </p>
+        <div className="space-y-2 mb-4">
+          {Object.entries(skillLevels)
+            .sort(([a, la], [b, lb]) => {
+              const w = (l: Level) => (l === 'strong' ? 3 : l === 'normal' ? 2 : 1)
+              return w(lb) - w(la) || a.localeCompare(b)
+            })
+            .map(([skill, level]) => (
+              <div
+                key={skill}
+                className="flex items-center gap-2 rounded-lg border border-gray-200 bg-gray-50/50 px-3 py-2"
               >
-                <Trash2 className="h-3 w-3" />
-              </button>
-            </span>
-          ))}
+                <span className="flex-1 text-sm font-medium text-gray-800 truncate">{skill}</span>
+                <div className="flex rounded-md border border-gray-200 bg-white p-0.5">
+                  {(['strong', 'normal', 'beginner'] as Level[]).map((lvl) => {
+                    const active = level === lvl
+                    const color =
+                      lvl === 'strong'
+                        ? 'bg-green-600 text-white'
+                        : lvl === 'normal'
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-gray-200 text-gray-600'
+                    return (
+                      <button
+                        key={lvl}
+                        type="button"
+                        onClick={() => setSkillLevels((prev) => ({ ...prev, [skill]: lvl }))}
+                        className={`rounded px-2.5 py-1 text-[11px] font-semibold capitalize transition-colors ${
+                          active ? color : 'text-gray-400 hover:text-gray-600'
+                        }`}
+                      >
+                        {lvl}
+                      </button>
+                    )
+                  })}
+                </div>
+                <button
+                  onClick={() =>
+                    setSkillLevels((prev) => {
+                      const next = { ...prev }
+                      delete next[skill]
+                      return next
+                    })
+                  }
+                  className="p-1.5 text-gray-400 hover:text-[#E4002B]"
+                  aria-label={`Remove ${skill}`}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </button>
+              </div>
+            ))}
+          {Object.keys(skillLevels).length === 0 && (
+            <p className="text-sm text-gray-400 italic">No skills yet — add some below.</p>
+          )}
         </div>
-        <div className="flex gap-2">
-          <input
-            value={skillInput}
-            onChange={(e) => setSkillInput(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' && skillInput.trim()) {
-                e.preventDefault()
-                setSkills((prev) => [...new Set([...prev, skillInput.trim()])])
-                setSkillInput('')
-              }
-            }}
-            placeholder="Add a skill and press Enter"
-            className="flex-1 h-9 rounded-md border border-gray-300 px-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#003781]"
-          />
-        </div>
+        <input
+          value={skillInput}
+          onChange={(e) => setSkillInput(e.target.value)}
+          onKeyDown={(e) => {
+            const v = skillInput.trim()
+            if (e.key === 'Enter' && v) {
+              e.preventDefault()
+              setSkillLevels((prev) => (v in prev ? prev : { ...prev, [v]: 'normal' }))
+              setSkillInput('')
+            }
+          }}
+          placeholder="Add a skill and press Enter (starts at Normal)"
+          className="w-full h-9 rounded-md border border-gray-300 px-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#003781]"
+        />
       </Card>
 
       {/* Experience */}

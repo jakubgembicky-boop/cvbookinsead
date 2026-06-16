@@ -393,8 +393,12 @@ function mergeOne(
     li_enriched_at: li?.scraped_at ?? '',
   }
 
-  // Pre-computed offline ranking (rank_skills.py) — keyed like fixKey().
-  result.categorized_skills = loadRankedSkills()[fixKey(cv)] ?? {}
+  // Skill proficiency: user's saved override wins; else the offline ranking
+  // (rank_skills.py), keyed like fixKey().
+  result.categorized_skills =
+    ov.categorized_skills && Object.keys(ov.categorized_skills).length > 0
+      ? ov.categorized_skills
+      : loadRankedSkills()[fixKey(cv)] ?? {}
 
   return result
 }
